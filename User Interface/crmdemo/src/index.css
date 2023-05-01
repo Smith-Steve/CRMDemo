@@ -7,7 +7,64 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Colors */
+.yblue {
+  background-color: #083D77;
+}
+
+.beige {
+  background-color: #EBEBD3;
+}
+
+.nyellow {
+  background-color: #F4D35E;
+}
+
+.sbrown {
+  background-color: #EE964B;
+}
+
+.tomato {
+  background-color: #F95738;
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.white {
+  color: #fff;
+}
+
+.header {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  padding: 1em;
+  margin-bottom: 2em;
+  z-index: 9; 
+}
+
+.side-bar {
+  position: fixed;
+  flex-direction: column;
+  min-height: 100vh;
+  white-space: nowrap;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  padding: 3rem;
+}
+
+.rounded-corners,
+button,
+input,
+textarea,
+select {
+  border-radius: 0.25rem;
 }
