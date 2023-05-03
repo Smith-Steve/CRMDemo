@@ -10,27 +10,27 @@ export default function Header(){
         </div>
         <nav className='navbar navbar-expand-sm bg-light yblue'>
             <ul className='navbar-nav yblue'>
-                <li className='nav-item m-1'>
+                <li>
                     <NavLink className="btn btn-light btn-outline-primary" to="/home">
                         Home
                     </NavLink>
                 </li>
-                <li className='nav-item m-1'>
+                <li>
                     <NavLink className="btn btn-light btn-outline-primary" to="/Customers">
                         Customers
                     </NavLink>
                 </li>
-                <li className='nav-item m-1'>
+                <li>
                     <NavLink className="btn btn-light btn-outline-primary" to="/Contacts">
                         Contacts
                     </NavLink>
                 </li>
-                <li className='nav-item m-1'>
+                <li>
                     <NavLink className="btn btn-light btn-outline-primary" to="/Flights">
                         Flight
                     </NavLink>
                 </li>
-                <li className='nav-item m-1'>
+                <li>
                     <NavLink className="btn btn-light btn-outline-primary" to="/Emails">
                         Email
                     </NavLink>
