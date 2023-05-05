@@ -1,5 +1,6 @@
 import React from 'react';
 import Sidebar from './components/sidebar';
+import HomeComponent from './components/home-component';
 import {BrowserRouter, Route, Switch, Routes} from 'react-router-dom'
 
 class Home extends React.Component {
@@ -16,6 +17,7 @@ class Home extends React.Component {
     return (
       <BrowserRouter>
         <Sidebar></Sidebar>
+        <HomeComponent/>
       </BrowserRouter>
     )
   }

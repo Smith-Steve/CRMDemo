@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function Sidebar(){
     return (
-        <div className='side-bar lg rounded-corners'>
+        <div className='side-bar lg rounded-corners grey'>
             <React.Fragment>
                 <div className='col'>
                     <div className='sidenav'>
