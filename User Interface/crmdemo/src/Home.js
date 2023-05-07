@@ -16,8 +16,13 @@ class Home extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <Sidebar></Sidebar>
-        <HomeComponent/>
+      <div className='container'>
+        <div className='row'>
+          <div className='col'>
+          <Sidebar/>
+          </div>
+        </div>
+      </div>
       </BrowserRouter>
     )
   }
