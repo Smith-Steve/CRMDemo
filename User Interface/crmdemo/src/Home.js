@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from './components/sidebar';
 import HomeComponent from './components/home-component';
-import parseRoute from './library/parse-route';
+import CreateCustomer from './components/CreateCustomers';
 import {BrowserRouter, Route, Switch, Routes} from 'react-router-dom'
 
 class Home extends React.Component {
@@ -19,7 +19,7 @@ class Home extends React.Component {
     const { path } = this.state.activeComponent;
     if(path === 'CreateContacts')
     {
-      return <CreateContacts/>
+      return <CreateCustomer/>
     }
     return <HomeComponent/>
   }
