@@ -16,7 +16,7 @@ class Home extends React.Component {
   }
 
   renderComponent() {
-    const { path } = this.state.activeComponent;
+    const path = this.state.activeComponent;
     if(path === 'CreateContacts')
     {
       return <CreateCustomer/>
@@ -34,7 +34,7 @@ class Home extends React.Component {
           </div>
         </div>
       </div>
-      <div className='component-container grey rounded-corners'>
+      <div className='component-container grey rounded-corners padding'>
         <div className='row'>
           <div className='col'>
             {this.renderComponent()}

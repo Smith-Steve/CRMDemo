@@ -27,6 +27,10 @@
   color: #fff;
 }
 
+.green {
+  color: #04AA6D
+}
+
 /* Rounded Corners */
 .rounded-corners {
   border-radius: 0.25rem;

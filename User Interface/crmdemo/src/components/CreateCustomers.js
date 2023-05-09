@@ -13,7 +13,9 @@ export default class CreateCustomer extends React.Component {
     render() {
         return(
             <div className='CreateCustomer'>
-                
+                        <div>
+                            <h1 className='green'>Add Customer</h1>
+                        </div>
             </div>
         )
     }
