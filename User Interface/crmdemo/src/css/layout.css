@@ -1,0 +1,47 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Containers */
+  
+  .container {
+    display: flex;
+    flex-direction: row; /* This is a default property */
+    flex-wrap: wrap;
+  }
+  
+  
+  .col {
+    width: 100%;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: flex;
+  }
+
+  .padding {
+    padding-left: 0.10rem;
+    padding-right: 0.10rem;
+    padding-bottom: 0.10rem;
+    padding-top: 0.10rem;
+  }
+
+  .side-bar {
+    position: absolute;
+    width: 8rem;
+    min-height: 100vh;
+    left: 0;
+    top: 0;
+  }
+
+  .component-container {
+    position: absolute;
+    left: 17vh;
+    margin: 0.10vh;
+    min-width: 185vh;
+    min-height: 99vh;
+  }
+  

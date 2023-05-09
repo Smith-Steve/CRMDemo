@@ -34,7 +34,7 @@ class Home extends React.Component {
           </div>
         </div>
       </div>
-      <div className='component-container'>
+      <div className='component-container grey rounded-corners'>
         <div className='row'>
           <div className='col'>
             {this.renderComponent()}

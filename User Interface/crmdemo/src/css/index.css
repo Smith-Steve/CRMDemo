@@ -1,33 +1,3 @@
-html, body {
-  height: 100%;
-}
-
-/* Containers */
-
-.container {
-  display: flex;
-  flex-direction: row; /* This is a default property */
-  flex-wrap: wrap;
-}
-
-
-.col {
-  width: 100%;
-}
-
-.row {
-  display: flex;
-  flex-direction: flex;
-}
-
-/* Borders/Padding */
-.padding {
-  padding-left: 0.10rem;
-  padding-right: 0.10rem;
-  padding-bottom: 0.10rem;
-  padding-top: 0.10rem;
-}
-
 /* Colors */
 .yblue {
   background-color: #083D77;
@@ -66,10 +36,13 @@ html, body {
 /* Components */
 
 .side-bar {
-  position: fixed;
+  position: absolute;
   width: 8rem;
   min-height: 100vh;
+  left: 0;
+  top: 0;
 }
+
 
 .side-bar a {
   color: black;
