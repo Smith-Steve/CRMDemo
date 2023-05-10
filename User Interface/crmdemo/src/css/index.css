@@ -36,6 +36,18 @@
   border-radius: 0.25rem;
 }
 
+input:hover {
+  cursor: pointer;
+  border: 0.188rem solid #04AA6D;
+  box-shadow: 0 0 1px 1px #04AA6D;
+}
+
+input, textarea, select {
+  padding: 0.2rem;
+  font-size: 1rem;
+  outline: #04AA6D;
+  cursor: pointer;
+}
 
 /* Components */
 
@@ -62,4 +74,16 @@
 .side-bar a.active {
   background-color: #EBEBD3;
   color: white;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  font-family: 'Montserrat', 'sans-serif';
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 2px 2px rgb(0, 0, 0, 0.5);
 }

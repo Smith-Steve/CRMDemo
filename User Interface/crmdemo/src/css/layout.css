@@ -11,26 +11,24 @@ html, body {
     flex-direction: row; /* This is a default property */
     flex-wrap: wrap;
     overflow: hidden;
-  }
-  
-  
-  .col {
+} 
+.col {
     width: 100%;
-  }
+}
   
-  .row {
+.row {
     display: flex;
     flex-direction: flex;
   }
 
-  .padding {
+.padding {
     padding-left: 0.10rem;
     padding-right: 0.10rem;
     padding-bottom: 0.10rem;
     padding-top: 0.10rem;
   }
 
-  .side-bar {
+.side-bar {
     position: absolute;
     width: 8rem;
     min-height: 100vh;
@@ -38,11 +36,42 @@ html, body {
     top: 0;
   }
 
-  .component-container {
+.component-container {
     position: absolute;
     left: 17vh;
     margin: 0.10vh;
     min-width: 185vh;
     min-height: 99vh;
   }
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-row {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0 1rem 0
+}
+
+.form-container,
+.table-container {
+    flex-basis: 100%;
+    padding: 0.4rem
+}
+
+.form-container {
+    margin-bottom: 1rem;
+    contain: content;
+}
+
+input, textarea, select {
+    display: block;
+    /* margin: 0 0 2rem 0; */
+    width: fill-available;
+    flex-basis: 100%;
+}
+
   
