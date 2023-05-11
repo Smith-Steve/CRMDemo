@@ -6,6 +6,7 @@ export default class CreateCustomer extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind()
+        this.handleSubmit = this.handleSubmit.bind()
         this.state = { CustomerName: '', CustomerStreet1: '', CustomerCity: '', CustomerState: '', CustomerVertical: '', ComponentApiString: 'CustomerAPI'}
     }
 
@@ -19,7 +20,41 @@ export default class CreateCustomer extends React.Component {
         })
     }
 
-    handleSubmit(){
+    // handleSubmit(event){
+    //     event.preventDefault();
+
+    //     fetch(variables.API_URL + this.state.ComponentApiString,
+    //         {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Accept': 'application/json',
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({
+    //                 CustomerName: this.state.CustomerName,
+    //                 CustomerStreet1: this.state.CustomerStreet1,
+    //                 CustomerCity: this.state.CustomerCity,
+    //                 CustomerState: this.state.CustomerState,
+    //                 CustomerVertical: this.state.CustomerVertical
+    //             })
+    //         }).then(
+    //             response => response.json()
+    //         ).then((returnedResponse) => {
+    //             if(returnedResponse){
+    //                 alert('Submitted')
+    //                 this.clearForm()
+    //             } else {
+    //                 alert('Not Submitted')
+    //             }
+    //         }).catch(error => {
+    //             if (error) throw error;
+    //         })
+    // }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+
+        //Fetch Call
         fetch(variables.API_URL + this.state.ComponentApiString,
             {
                 method: 'POST',
@@ -93,7 +128,7 @@ export default class CreateCustomer extends React.Component {
                                     <input type="text" name="CustomerVertical" value={this.state.CustomerVertical} onChange={this.handleChange} required></input>
                                 </div>
                                 <div className='align-right'>
-                                    <button onSubmit={this.createNewCustomerClick}>Enter Customer</button>
+                                    <button onSubmit={this.handleSubmit}>Enter Customer</button>
                                 </div>
                             </form>
                         </div>

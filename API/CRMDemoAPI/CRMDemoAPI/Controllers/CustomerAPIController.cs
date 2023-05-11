@@ -85,7 +85,7 @@ namespace CRMDemoAPI.Controllers
                 using (SqlCommand postCommand = new SqlCommand(insertCustomer, postSqlConnection))
                 {
                     postCommand.Parameters.AddWithValue("@CustomerName", customer.CustomerName);
-                    postCommand.Parameters.AddWithValue("@CustomerStreet", customer.CustomerStreet);
+                    postCommand.Parameters.AddWithValue("@CustomerStreet1", customer.CustomerStreet1);
                     postCommand.Parameters.AddWithValue("@CustomerCity", customer.CustomerCity);
                     postCommand.Parameters.AddWithValue("@CustomerState", customer.CustomerState);
                     postCommand.Parameters.AddWithValue("@CustomerJoin", DateTime.Now);
@@ -103,7 +103,7 @@ namespace CRMDemoAPI.Controllers
         public JsonResult PutCustomer(Customers customers)
         {
             string updateCustomerSqlString = @"update dbo.Customers
-                                            set CustomerName = @CustomerName, CustomerStreet = @CustomerStreet,
+                                            set CustomerName = @CustomerName, CustomerStreet1 = @CustomerStreet1,
                                             CustomerCity = @CustomerCity, CustomerState = @CustomerState,
                                             CustomerVertical = @CustomerVertical where CustomerId = @CustomerId";
 
@@ -117,7 +117,7 @@ namespace CRMDemoAPI.Controllers
                 {
                     putCommand.Parameters.AddWithValue("@CustomerId", customers.CustomerId);
                     putCommand.Parameters.AddWithValue("@CustomerName", customers.CustomerName);
-                    putCommand.Parameters.AddWithValue("@CustomerStreet", customers.CustomerStreet);
+                    putCommand.Parameters.AddWithValue("@CustomerStreet", customers.CustomerStreet1);
                     putCommand.Parameters.AddWithValue("@CustomerCity", customers.CustomerCity);
                     putCommand.Parameters.AddWithValue("@CustomerState", customers.CustomerState);
                     putCommand.Parameters.AddWithValue("@CustomerVertical", customers.CustomerVertical);

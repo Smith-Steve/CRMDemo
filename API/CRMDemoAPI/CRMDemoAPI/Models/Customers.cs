@@ -10,7 +10,7 @@ namespace CRMDemoAPI.Models
     {
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
-        public string CustomerStreet { get; set; }
+        public string CustomerStreet1 { get; set; }
         public string CustomerStreet2 { get; set; }
         public string CustomerCity { get; set; }
         public string CustomerState { get; set; }
