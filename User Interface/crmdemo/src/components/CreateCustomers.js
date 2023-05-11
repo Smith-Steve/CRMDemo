@@ -1,6 +1,6 @@
 import React from 'react';
-import ApiVariables from '../Library/API_URLS'
-import APICalls from '../Library/API_Calls'
+import { variables } from '../Library/API_URLS'
+// import APICalls from '../Library/API_Calls'
 
 export default class CreateCustomer extends React.Component {
     constructor(props) {
@@ -19,8 +19,8 @@ export default class CreateCustomer extends React.Component {
         })
     }
 
-    createNewCustomerClick(){
-        fetch(ApiVariables.variables.API_URL+this.state.ComponentApiString,
+    handleSubmit(){
+        fetch(variables.API_URL + this.state.ComponentApiString,
             {
                 method: 'POST',
                 headers: {
@@ -48,10 +48,15 @@ export default class CreateCustomer extends React.Component {
             })
     }
 
-    handleChange(event){
+    handleChange = (event) => {
         const name = event.target.name;
-        this.setState({ [name]: event.target.value})
+        this.setState({[name] : event.target.value})
     }
+
+    // handleChange(event){
+    //     const name = event.target.name;
+    //     this.setState({ [name]: event.target.value})
+    // }
 
     clearForm() {
         this.setState({CustomerName: '', CustomerStreet1: '', CustomerCity: '', CustomerState: '', CustomerVertical: ''})
@@ -66,14 +71,14 @@ export default class CreateCustomer extends React.Component {
                 <div className='row'>
                     <div className='col'>
                         <div className='form-container rounded-corners lg'>
-                            <form>
+                            <form onSubmit={this.handleSubmit}>
                                 <div className='input-row'>
                                     <label>Customer Name</label>
                                     <input type="text" name="CustomerName" value={this.state.CustomerName} onChange={this.handleChange} required></input>
                                 </div>
                                 <div className='input-row'>
                                     <label>Customer Street 1</label>
-                                    <input type="text" name="Customer Street 1" value={this.state.CustomerStreet1} onChange={this.handleChange} required></input>
+                                    <input type="text" name="CustomerStreet1" value={this.state.CustomerStreet1} onChange={this.handleChange} required></input>
                                 </div>
                                 <div className='input-row'>
                                     <label>Customer City</label>
