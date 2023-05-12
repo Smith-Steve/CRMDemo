@@ -109,23 +109,23 @@ export default class CreateCustomer extends React.Component {
                             <form onSubmit={this.handleSubmit}>
                                 <div className='input-row'>
                                     <label>Customer Name</label>
-                                    <input type="text" name="CustomerName" value={this.state.CustomerName} onChange={this.handleChange} required></input>
+                                    <input className="rounded-corners" type="text" name="CustomerName" value={this.state.CustomerName} onChange={this.handleChange} required></input>
                                 </div>
                                 <div className='input-row'>
                                     <label>Customer Street 1</label>
-                                    <input type="text" name="CustomerStreet1" value={this.state.CustomerStreet1} onChange={this.handleChange} required></input>
+                                    <input className="rounded-corners" type="text" name="CustomerStreet1" value={this.state.CustomerStreet1} onChange={this.handleChange} required></input>
                                 </div>
                                 <div className='input-row'>
                                     <label>Customer City</label>
-                                    <input type="text" name="CustomerCity" value={this.state.CustomerCity} onChange={this.handleChange} required></input>
+                                    <input className="rounded-corners" type="text" name="CustomerCity" value={this.state.CustomerCity} onChange={this.handleChange} required></input>
                                 </div>
                                 <div className='input-row'>
                                     <label>Customer State</label>
-                                    <input type="text" name="CustomerState" value={this.state.CustomerState} onChange={this.handleChange} required></input>
+                                    <input className="rounded-corners" type="text" name="CustomerState" value={this.state.CustomerState} onChange={this.handleChange} required></input>
                                 </div>
                                 <div className='input-row'>
                                     <label>Customer Vertical</label>
-                                    <input type="text" name="CustomerVertical" value={this.state.CustomerVertical} onChange={this.handleChange} required></input>
+                                    <input className="rounded-corners" type="text" name="CustomerVertical" value={this.state.CustomerVertical} onChange={this.handleChange} required></input>
                                 </div>
                                 <div className='align-right'>
                                     <button onSubmit={this.handleSubmit}>Enter Customer</button>
