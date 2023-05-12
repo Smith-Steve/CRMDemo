@@ -74,4 +74,8 @@ input, textarea, select {
     flex-basis: 100%;
 }
 
-  
+.Component-Element-Container {
+  display: block;
+  padding: 0.01em 16px;
+  margin-top: 1em;
+}

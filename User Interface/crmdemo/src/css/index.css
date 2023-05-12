@@ -87,3 +87,8 @@ button {
   cursor: pointer;
   box-shadow: 2px 2px rgb(0, 0, 0, 0.5);
 }
+
+.Component-Element-Container {
+  border-style: groove;
+  background-color:rgb(232,232,232)
+}

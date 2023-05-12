@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './components/sidebar';
 import HomeComponent from './components/home-component';
 import CreateCustomer from './components/CreateCustomers';
+import Customers from './components/Customers/Customers';
 import {BrowserRouter, Route, Switch, Routes} from 'react-router-dom'
 
 class Home extends React.Component {
@@ -20,6 +21,8 @@ class Home extends React.Component {
     if(path === 'CreateContacts')
     {
       return <CreateCustomer/>
+    } else if (path === 'Customers') {
+      return <Customers/>
     }
     return <HomeComponent/>
   }

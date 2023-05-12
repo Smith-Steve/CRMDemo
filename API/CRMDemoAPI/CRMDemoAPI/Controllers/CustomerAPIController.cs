@@ -74,7 +74,7 @@ namespace CRMDemoAPI.Controllers
         public JsonResult PostCustomer(Customers customer)
         {
             string insertCustomer = @"insert into dbo.Customers (CustomerName, CustomerStreet1, CustomerCity, CustomerState, CustomerJoin, CustomerVertical)
-                                    values (@CustomerName, @CustomerStreet, @CustomerCity, @CustomerState, @CustomerJoin, @CustomerVertical)";
+                                    values (@CustomerName, @CustomerStreet1, @CustomerCity, @CustomerState, @CustomerJoin, @CustomerVertical)";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
