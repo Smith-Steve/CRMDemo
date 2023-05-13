@@ -1,7 +1,7 @@
 import React from 'react';
 import Sidebar from './components/sidebar';
 import HomeComponent from './components/home-component';
-import CreateCustomer from './components/CreateCustomers';
+import CreateCustomer from './components/Customers/CreateCustomers';
 import Customers from './components/Customers/Customers';
 import {BrowserRouter, Route, Switch, Routes} from 'react-router-dom'
 

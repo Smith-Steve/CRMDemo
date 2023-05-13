@@ -1,5 +1,6 @@
 import React from 'react';
-import { variables } from '../Library/API_URLS'
+// import { variables } from '../Components/Library/API_URLS'
+import { variables } from '../../Library/API_Calls'
 // import APICalls from '../Library/API_Calls'
 
 export default class CreateCustomer extends React.Component {
