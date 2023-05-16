@@ -36,29 +36,39 @@ export default class Customers extends React.Component {
         )
     }
 
-    //front end pagination
-    // pageChange = (firstPage, lastPage) => {
-    //     console.log("I've been invoked.")
-    //     const page1 = 6
-    //     const page2 = 11
-    //     this.setState({firstPage: page1, lastPage: page2})
-    // }
-
     handleClick(event) {
         console.log(event.target.id)
         const targetElement = event.target.id
-        const firstPage = this.state.firstPage + 5; const lastPage = this.state.lastPage + 5
+        this.determinePage(this.state.customerList.length)
         if(targetElement === 'forward-button'){
             
-            this.setState({firstPage: firstPage, lastPage: lastPage})
+            // this.setState({firstPage: firstPage, lastPage: lastPage})
         } else if(targetElement === 'backward-button'){
 
         }
-        this.setState({firstPage: 6, lastPage: 11})
+        this.determinePage(this.state.customerList.length)
     }
 
-    determinePage(){
+    changeStatePage(first, last){
+        //the variables being passed into this represent the 'first page' and the 'last page'
+        this.setState({firstPage: first, lastPage: last})
+    }
 
+    determinePage(listLength){
+        const workingIndex = Math.floor(Math.random() * listLength)
+        let secondaryIndex;
+        if (workingIndex < 5){
+            secondaryIndex = workingIndex + 5;
+        } else {
+            secondaryIndex = workingIndex - 5;
+        }
+
+        this.changeStatePage(workingIndex, secondaryIndex)
+
+        console.log('Working Index: ' + workingIndex)
+        console.log('Secondary Index" ' + secondaryIndex)
+        // min = math.ceil(min)
+        // max = math.floor(max)
     }//since we're just working with a front end page turner, we need to find a way to; a, change the page;b 
     // change the page in such a way we don't go beyond the total number of companies in the list.
 
@@ -73,7 +83,7 @@ export default class Customers extends React.Component {
                     <div className='component-element-container'>
                         <div className='center'>
                                 <button className='green forward-button' id='forward-button'onClick={this.handleClick.bind(this)}>Forward</button>
-                                <button className='green backward-button' id='backward-button'>Backward</button>
+                                <button className='green backward-button' id='backward-button' onClick={this.handleClick.bind(this)}>Backward</button>
                         </div>
                     </div>
                 </div>
