@@ -37,42 +37,26 @@ export default class Customers extends React.Component {
     }
 
     handleClick(event) {
-        console.log(event.target.id)
         const targetElement = event.target.id
-        this.determinePage(this.state.customerList.length)
-        if(targetElement === 'forward-button'){
-            
-            // this.setState({firstPage: firstPage, lastPage: lastPage})
-        } else if(targetElement === 'backward-button'){
-
-        }
-        this.determinePage(this.state.customerList.length)
+        this.manageList()
     }
 
-    changeStatePage(first, last){
-        //the variables being passed into this represent the 'first page' and the 'last page'
-        this.setState({firstPage: first, lastPage: last})
-    }
-
-    determinePage(listLength){
-        const workingIndex = Math.floor(Math.random() * listLength)
-        let secondaryIndex;
-        if (workingIndex < 5){
-            secondaryIndex = workingIndex + 5;
-        } else {
-            secondaryIndex = workingIndex - 5;
+    manageList(){
+        let lowIndex = Math.floor(Math.random() * this.state.customerList.length - 5);
+        let highIndex = lowIndex + 5;
+        console.log('low index: ', lowIndex)
+        console.log('high index: ', highIndex)
+        if(lowIndex <= 0){
+            lowIndex = 0
+            highIndex = 5
         }
+        this.setState({firstPage: lowIndex, lastPage: highIndex})
 
-        this.changeStatePage(workingIndex, secondaryIndex)
+        //Since we're working on this just as a prototype, we have configured it in such a way that the pages will randomly flip and return
+        //a positive value that is within the list of pages.
 
-        console.log('Working Index: ' + workingIndex)
-        console.log('Secondary Index" ' + secondaryIndex)
-        // min = math.ceil(min)
-        // max = math.floor(max)
-    }//since we're just working with a front end page turner, we need to find a way to; a, change the page;b 
-    // change the page in such a way we don't go beyond the total number of companies in the list.
-
-
+        //in a full blown application, this would be managed systematically.
+    }
     render(){
         const CustomerList = this.state.customerList.slice(this.state.firstPage,this.state.lastPage)
         return(
