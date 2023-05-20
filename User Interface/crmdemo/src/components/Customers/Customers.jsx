@@ -11,6 +11,7 @@ export default class Customers extends React.Component {
         //since this application is a demo, we will be making a complete API call for all the customers, and then controlling
         //the display of the list by slicing it.
         this.handleClick = this.handleClick.bind(this)
+        this.setCustomer = this.setCustomer.bind(this)
     }
 
     componentDidMount(){
@@ -27,17 +28,23 @@ export default class Customers extends React.Component {
             })
     }
 
+    setCustomer(customer){
+        this.props.setActiveCustomer(customer.CustomerName)
+        console.log(customer)
+    }
+
     renderCustomerRow(customer){
         return(
             <div className='Component-Element-Container'>
-                <h3>{customer.CustomerName}</h3>
+                <a href={`/Customer/${customer.CustomerName.replace(/\s/g, '')}`}><h3>{customer.CustomerName}</h3></a>
                 <p>{customer.CustomerStreet1}</p>
             </div>
         )
+        //treating customer name to replacde spaces.
+        //return to work here to continue. Trying to capture selected element so it can be passed into props/state.
     }
 
-    handleClick(event) {
-        const targetElement = event.target.id
+    handleClick() {
         this.manageList()
     }
 
@@ -66,8 +73,7 @@ export default class Customers extends React.Component {
                     {CustomerList.length > 0 ? CustomerList.map(this.renderCustomerRow) : <div>No number</div>}
                     <div className='component-element-container'>
                         <div className='center'>
-                                <button className='green forward-button' id='forward-button'onClick={this.handleClick.bind(this)}>Forward</button>
-                                <button className='green backward-button' id='backward-button' onClick={this.handleClick.bind(this)}>Backward</button>
+                                <button className='green forward-button' id='forward-button'onClick={this.handleClick.bind(this)}>Click</button>
                         </div>
                     </div>
                 </div>

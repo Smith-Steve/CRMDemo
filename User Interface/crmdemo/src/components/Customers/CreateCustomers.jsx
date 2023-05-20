@@ -1,6 +1,7 @@
 import React from 'react';
 // import { variables } from '../Components/Library/API_URLS'
-import { variables } from '../../Library/API_Calls'
+import { variables } from '../../Library/API_URLS';
+import { API_CALL_HEADER_POST_REQUEST } from '../../Library/API_Call_Headers';
 // import APICalls from '../Library/API_Calls'
 
 export default class CreateCustomer extends React.Component {
@@ -55,11 +56,6 @@ export default class CreateCustomer extends React.Component {
         const name = event.target.name;
         this.setState({[name] : event.target.value})
     }
-
-    // handleChange(event){
-    //     const name = event.target.name;
-    //     this.setState({ [name]: event.target.value})
-    // }
 
     clearForm() {
         this.setState({CustomerName: '', CustomerStreet1: '', CustomerCity: '', CustomerState: '', CustomerVertical: ''})

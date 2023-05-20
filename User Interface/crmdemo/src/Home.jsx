@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './components/sidebar';
 import HomeComponent from './components/home-component';
 import CreateCustomer from './components/Customers/CreateCustomers';
+import CustomerProfilePage from './components/Customers/CustomerProfilePage';
 import Customers from './components/Customers/Customers';
 import {BrowserRouter, Route, Switch, Routes} from 'react-router-dom'
 
@@ -9,7 +10,12 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.activeComponent = this.setActiveComponent.bind(this)
-    this.state = { activeComponent: window.location.pathname.replace('/','')}
+    this.setActiveCustomer = this.setActiveCustomer.bind(this)
+    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: ''}
+  }
+
+  setActiveCustomer(selectedCustomer){
+    this.setState({ activeCustomer: selectedCustomer})
   }
 
   setActiveComponent(selectComponent) {
@@ -22,7 +28,9 @@ class Home extends React.Component {
     {
       return <CreateCustomer/>
     } else if (path === 'Customers') {
-      return <Customers/>
+      return <Customers setActiveCustomer={this.setActiveCustomer}/>
+    } else if (path.substring(0, path.indexOf('/')) === 'Customer') {
+      return <CustomerProfilePage/>
     }
     return <HomeComponent/>
   }

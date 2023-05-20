@@ -5,7 +5,7 @@ export default function HomeComponent() {
         <React.Fragment>
             <div className="container">
                 <div className="rounded-corners">
-                    Hello
+                    Home Component
                 </div>
             </div>
         </React.Fragment>
