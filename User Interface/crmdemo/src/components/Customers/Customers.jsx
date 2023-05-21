@@ -11,7 +11,9 @@ export default class Customers extends React.Component {
         //since this application is a demo, we will be making a complete API call for all the customers, and then controlling
         //the display of the list by slicing it.
         this.handleClick = this.handleClick.bind(this)
-        this.setCustomer = this.setCustomer.bind(this)
+        this.setCustomer = this.setCustomer.bind(this);
+        this.renderCustomerRow = this.renderCustomerRow.bind(this);
+        // this.setCustomer = this.setCustomer.bind(this)
     }
 
     componentDidMount(){
@@ -29,13 +31,15 @@ export default class Customers extends React.Component {
     }
 
     setCustomer(customer){
+        console.log('this does not fire at all.')
         this.props.setActiveCustomer(customer.CustomerName)
-        console.log(customer)
+        window.localStorage.setItem('Active-Customer', JSON.stringify(customer))
     }
 
     renderCustomerRow(customer){
+        let customerCard = customer
         return(
-            <div className='Component-Element-Container'>
+            <div className='Component-Element-Container' onClick={() => this.setCustomer(customerCard)}>
                 <a href={`/Customer/${customer.CustomerName.replace(/\s/g, '')}`}><h3>{customer.CustomerName}</h3></a>
                 <p>{customer.CustomerStreet1}</p>
             </div>

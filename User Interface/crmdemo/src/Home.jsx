@@ -11,7 +11,7 @@ class Home extends React.Component {
     super(props);
     this.activeComponent = this.setActiveComponent.bind(this)
     this.setActiveCustomer = this.setActiveCustomer.bind(this)
-    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: ''}
+    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: JSON.parse(localStorage.getItem('Active-Customer') || null)}
   }
 
   setActiveCustomer(selectedCustomer){
