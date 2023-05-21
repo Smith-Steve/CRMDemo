@@ -30,7 +30,7 @@ class Home extends React.Component {
     } else if (path === 'Customers') {
       return <Customers setActiveCustomer={this.setActiveCustomer}/>
     } else if (path.substring(0, path.indexOf('/')) === 'Customer') {
-      return <CustomerProfilePage/>
+      return <CustomerProfilePage activeCustomer={this.state.activeCustomer}/>
     }
     return <HomeComponent/>
   }

@@ -8,12 +8,11 @@ export default class Customers extends React.Component {
     constructor(props){
         super(props);
         this.state = { component: 'Customers', customerList: [], firstPage: 0, lastPage: 5}
-        //since this application is a demo, we will be making a complete API call for all the customers, and then controlling
-        //the display of the list by slicing it.
         this.handleClick = this.handleClick.bind(this)
         this.setCustomer = this.setCustomer.bind(this);
         this.renderCustomerRow = this.renderCustomerRow.bind(this);
-        // this.setCustomer = this.setCustomer.bind(this)
+        //There is presently no way to set the state for active customer in this component.
+        //This is because the entire customer set of information is not required on this page.
     }
 
     componentDidMount(){
@@ -39,7 +38,7 @@ export default class Customers extends React.Component {
     renderCustomerRow(customer){
         let customerCard = customer
         return(
-            <div className='Component-Element-Container' onClick={() => this.setCustomer(customerCard)}>
+            <div className='Component-Element-Container' onClick={() => this.setCustomer(customerCard)} key={customer.CustomerId}>
                 <a href={`/Customer/${customer.CustomerName.replace(/\s/g, '')}`}><h3>{customer.CustomerName}</h3></a>
                 <p>{customer.CustomerStreet1}</p>
             </div>
