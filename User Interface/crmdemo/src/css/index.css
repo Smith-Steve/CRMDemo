@@ -31,6 +31,11 @@
   color: #04AA6D
 }
 
+.red {
+  background-color: #f44336
+}
+/* Delete Button */
+
 /* Rounded Corners */
 .rounded-corners {
   border-radius: 0.25rem;
@@ -91,4 +96,20 @@ button {
 .Component-Element-Container {
   border-style: groove;
   background-color:rgb(232,232,232)
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
 }
