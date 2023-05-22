@@ -80,8 +80,12 @@ input, textarea, select {
   margin: 0.6em;
 }
 
-.forward-button, .backward-button{
-  margin: 1rem;
+.forward-button,.backward-button, .customer-profile-button{
+  margin: 0.5rem;
   padding: 0.4rem;
 }
 
+table {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}

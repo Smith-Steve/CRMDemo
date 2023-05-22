@@ -21,13 +21,13 @@ export default class CustomerProfilePage extends React.Component {
 
     convertDate = (entryDate) => {
         let originalDate = new Date(entryDate)
-        let returnDate = new Date(originalDate.getFullYear(), originalDate.getMonth(), originalDate.getDate())
+        let returnDate = originalDate.getFullYear()
         return returnDate
     }
 
     render(){
         const renderedDate = this.convertDate(this.props.activeCustomer.CustomerJoin)
-        console.log(typeof renderedDate)
+        console.log(renderedDate)
         return(
             <div className={this.state.component}>
                 <HeaderComponent component={this.state.component} activeCustomer={this.props.activeCustomer.CustomerName}/>
@@ -49,7 +49,7 @@ export default class CustomerProfilePage extends React.Component {
                             <div className='col'>
                                 <b>Organization Detail:</b>
                                 <div className='center'>
-                                    <button className='rounded-corners'>Edit Customer</button> <button className='rounded-corners'>Edit Customer 2</button> <button className='red rounded-corners'> Delete Customer</button>
+                                    <button className='rounded-corners customer-profile-button'>Edit Customer</button> <button className='rounded-corners customer-profile-button'>Add Contact</button> <button className='red rounded-corners customer-profile-button'> Delete Customer</button>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,12 @@ export default class CustomerProfilePage extends React.Component {
                                         </tr>
                                         <tr>
                                             <td><b>Customer State: </b>{this.props.activeCustomer.CustomerCity}</td>
-                                            <td><b>Customer Acquisition Date:</b></td>
+                                            <td><b>Customer Acquisition Date: </b>{renderedDate}</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Created By: </b></td>
+                                            <td><b>Modified By: </b></td>
                                             <td></td>
                                         </tr>
                                     </tbody>
