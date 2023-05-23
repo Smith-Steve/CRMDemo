@@ -6,18 +6,22 @@ import { API_CALL_HEADER_GET_REQUEST } from '../../Library/API_Call_Headers';
 export default class CustomerProfilePage extends React.Component {
     constructor(props){
         super(props);
-        this.state = { component: 'Customer Profile Page', activeCustomer: this.props.activeCustomer.CustomerName}
+        this.state = { component: 'Customer Profile Page', activeCustomer: this.props.activeCustomer.CustomerName, activeContactList:[] }
     }
 
-    //Not sure that I will need to be able to pull this information, but it might be good to retain in state in case
-    // it needs to be changed.
-    // getCustomerInfo(){
-    //     fetch(`${variables.API_URL}/CustomerAPI/Details/${this.props.activeCustomer.customerId}`, API_CALL_HEADER_GET_REQUEST)
-    //         .then(response => response.json())
-    //         .then(returnedResponse => {
-    //             this.setState({ activeCustomer: returnedResponse})
-    //         }).catch(error => console.error(error))
-    // }
+    componentDidMount(){
+        this.getListOfContacts()
+    }
+
+    getListOfContacts() {
+        fetch(variables.API_URL + 'Contact/CustomerContacts/' + this.props.activeCustomer.CustomerId , API_CALL_HEADER_GET_REQUEST)
+            .then(response => response.json())
+            .then(returnedResponse => {
+                this.setState({activeContactList: returnedResponse})
+            }).catch(error => {
+                if (error) console.log(error)
+            })
+    }
 
     convertDate = (entryDate) => {
         let originalDate = new Date(entryDate)
@@ -25,9 +29,34 @@ export default class CustomerProfilePage extends React.Component {
         return returnDate
     }
 
+    buildContactTable(customerContactList){
+        const contactRow = customerContactList.map(contact => {
+            return <tr><td><span>{contact.FirstName + ' ' + contact.LastName}</span></td><td>{contact.Email}</td><td>{contact.PhoneNumber}</td><td><button className='rounded-corners customer-profile-button'>Edit Contact</button><button className='red rounded-corners customer-profile-button'> Delete Contact</button></td></tr>
+        })
+
+        return(
+            <div className='row'>
+                <div className='col'>
+                    <table>
+                        <thead>
+                            <tr className='green'>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {contactRow}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        )
+    }
+
     render(){
         const renderedDate = this.convertDate(this.props.activeCustomer.CustomerJoin)
-        console.log(renderedDate)
+        const contactList = this.state.activeContactList;
         return(
             <div className={this.state.component}>
                 <HeaderComponent component={this.state.component} activeCustomer={this.props.activeCustomer.CustomerName}/>
@@ -98,6 +127,9 @@ export default class CustomerProfilePage extends React.Component {
                                 </table>
                             </div>
                         </div>
+                    </div>
+                    <div className='Component-Element-Container'>
+                        {contactList.length > 0 ? this.buildContactTable(contactList) : null}
                     </div>
                 </div>
             </div>
