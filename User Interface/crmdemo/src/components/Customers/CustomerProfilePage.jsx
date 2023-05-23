@@ -23,6 +23,10 @@ export default class CustomerProfilePage extends React.Component {
             })
     }
 
+    handlePageChange = () => {
+        window.location.hash = "#/addContact"
+    }
+
     convertDate = (entryDate) => {
         let originalDate = new Date(entryDate)
         let returnDate = originalDate.getFullYear()
@@ -31,7 +35,7 @@ export default class CustomerProfilePage extends React.Component {
 
     buildContactTable(customerContactList){
         const contactRow = customerContactList.map(contact => {
-            return <tr><td><span>{contact.FirstName + ' ' + contact.LastName}</span></td><td>{contact.Email}</td><td>{contact.PhoneNumber}</td><td><button className='rounded-corners customer-profile-button'>Edit Contact</button><button className='red rounded-corners customer-profile-button'> Delete Contact</button></td></tr>
+            return <tr><td><span>{contact.FirstName + ' ' + contact.LastName}</span></td><td>{contact.Email}</td><td>{contact.PhoneNumber}</td><td><button className='rounded-corners contact-button'>Edit</button><button className='red rounded-corners contact-button'> Delete</button></td></tr>
         })
 
         return(
@@ -78,7 +82,7 @@ export default class CustomerProfilePage extends React.Component {
                             <div className='col'>
                                 <b>Organization Detail:</b>
                                 <div className='center'>
-                                    <button className='rounded-corners customer-profile-button'>Edit Customer</button> <button className='rounded-corners customer-profile-button'>Add Contact</button> <button className='red rounded-corners customer-profile-button'> Delete Customer</button>
+                                    <button className='rounded-corners customer-profile-button'>Edit Customer</button> <button onClick={this.handlePageChange} className='rounded-corners customer-profile-button'>Add Contact</button> <button className='red rounded-corners customer-profile-button'> Delete Customer</button>
                                 </div>
                             </div>
                         </div>
