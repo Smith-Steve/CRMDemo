@@ -1,6 +1,6 @@
 import React from "react";
-import { variables } from '../../Library/API_URLS';
-import { API_CALL_HEADER_POST_REQUEST } from '../../Library/API_Call_Headers';
+import { variables } from "../../../Library/API_URLS";
+import { API_CALL_HEADER_POST } from "../../../Library/API_Call_Headers";
 import HeaderComponent from "../../HelperComponents/ComponentHeaders";
 
 class CreateContact extends React.Component {
@@ -26,3 +26,5 @@ class CreateContact extends React.Component {
         )
     }
 }
+
+export default CreateContact

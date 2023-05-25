@@ -6,6 +6,7 @@ import { API_CALL_HEADER_GET_REQUEST } from '../../Library/API_Call_Headers';
 export default class CustomerProfilePage extends React.Component {
     constructor(props){
         super(props);
+        this.setComponent = this.setComponent.bind(this);
         this.state = { component: 'Customer Profile Page', activeCustomer: this.props.activeCustomer.CustomerName, activeContactList:[] }
     }
 
@@ -23,8 +24,9 @@ export default class CustomerProfilePage extends React.Component {
             })
     }
 
-    handlePageChange = () => {
-        window.location.hash = "#/addContact"
+    setComponent(){
+        console.log("I am working")
+        this.props.setComponent('CreateContact')
     }
 
     convertDate = (entryDate) => {
@@ -82,7 +84,7 @@ export default class CustomerProfilePage extends React.Component {
                             <div className='col'>
                                 <b>Organization Detail:</b>
                                 <div className='center'>
-                                    <button className='rounded-corners customer-profile-button'>Edit Customer</button> <button onClick={this.handlePageChange} className='rounded-corners customer-profile-button'>Add Contact</button> <button className='red rounded-corners customer-profile-button'> Delete Customer</button>
+                                    <button className='rounded-corners customer-profile-button'>Edit Customer</button> <button onClick={this.setComponent} className='rounded-corners customer-profile-button'>Add Contact</button> <button className='red rounded-corners customer-profile-button'> Delete Customer</button>
                                 </div>
                             </div>
                         </div>

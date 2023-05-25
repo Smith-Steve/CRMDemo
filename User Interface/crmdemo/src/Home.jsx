@@ -4,13 +4,14 @@ import HomeComponent from './components/home-component';
 import CreateCustomer from './components/Customers/CreateCustomers';
 import CustomerProfilePage from './components/Customers/CustomerProfilePage';
 import Customers from './components/Customers/Customers';
+import CreateContact from './components/Customers/Contacts/CreateContact'
 import {BrowserRouter, Route, Switch, Routes} from 'react-router-dom'
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.activeComponent = this.setActiveComponent.bind(this)
     this.setActiveCustomer = this.setActiveCustomer.bind(this)
+    this.setComponent = this.setComponent.bind(this)
     this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: JSON.parse(localStorage.getItem('Active-Customer') || null)}
   }
 
@@ -18,8 +19,8 @@ class Home extends React.Component {
     this.setState({ activeCustomer: selectedCustomer})
   }
 
-  setActiveComponent(selectComponent) {
-    this.setState({ activeComponent: selectComponent});
+  setComponent(component){
+    this.setState({activeComponent: component})
   }
 
   renderComponent() {
@@ -30,7 +31,9 @@ class Home extends React.Component {
     } else if (path === 'Customers') {
       return <Customers setActiveCustomer={this.setActiveCustomer}/>
     } else if (path.substring(0, path.indexOf('/')) === 'Customer') {
-      return <CustomerProfilePage activeCustomer={this.state.activeCustomer}/>
+      return <CustomerProfilePage setComponent={this.setComponent} activeCustomer={this.state.activeCustomer} setActiveCustomer={this.setActiveCustomer}/>
+    } else if (path === 'CreateContact'){
+      return <CreateContact activeCustomer={this.state.activeCustomer}/>
     }
     return <HomeComponent/>
   }
