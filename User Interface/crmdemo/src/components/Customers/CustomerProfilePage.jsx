@@ -1,7 +1,7 @@
 import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders'
 import { variables } from '../../Library/API_URLS';
-import { API_CALL_HEADER_GET_REQUEST } from '../../Library/API_Call_Headers';
+import { API_CALL_HEADER_GET_REQUEST, API_CALL_HEADER_DELETE_REQUEST } from '../../Library/API_Call_Headers';
 
 export default class CustomerProfilePage extends React.Component {
     constructor(props){
@@ -24,8 +24,14 @@ export default class CustomerProfilePage extends React.Component {
             })
     }
 
+    deleteCustomer(){
+        fetch(`${variables.API_URL}CustomerAPI/${this.props.activeCustomer.CustomerId}`, API_CALL_HEADER_DELETE_REQUEST)
+            .then(response => {
+                if(response) alert('removed from flight');
+            }).catch(error => console.error(error))
+    }
+
     setComponent(){
-        console.log("I am working")
         this.props.setComponent('CreateContact')
     }
 

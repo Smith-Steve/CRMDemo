@@ -5,3 +5,7 @@ export const API_CALL_HEADER_GET_REQUEST = {
 export const API_CALL_HEADER_POST_REQUEST = {
     method: 'POST', headers: { 'Accept' : 'application/json', 'Content-Type': 'application/json'}
 }
+
+export const API_CALL_HEADER_DELETE_REQUEST = {
+    method: 'DELETE', headers: {'Accept' : 'application/json', 'Content-Type': 'application/json'}
+}
