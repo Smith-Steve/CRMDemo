@@ -24,6 +24,10 @@ export default class CustomerProfilePage extends React.Component {
             })
     }
 
+    deleteContact(){
+        
+    }
+
     deleteCustomer(){
         fetch(`${variables.API_URL}CustomerAPI/${this.props.activeCustomer.CustomerId}`, API_CALL_HEADER_DELETE_REQUEST)
             .then(response => {
