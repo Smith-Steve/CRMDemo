@@ -23,32 +23,43 @@ class CreateContact extends React.Component {
     }
 
     handleSubmit(event){
-        event.preventDefault()
-        let contact = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            PhoneNumber: this.state.PhoneNumber,
-            Email: this.state.Email
-        }
-        const initMethod = {API_CALL_HEADER_POST_REQUEST , body: JSON.stringify(contact)};
-        fetch(`${variables.API_URL}Contact`, initMethod)
-            .then(response => response.json())
-            .then(returnedResponse => {
-                if (returnedResponse) alert('Contact Submitted');
-                this.clearForm()
-            }).catch(error => {
-                console.error(error)
+        event.preventDefault();
+
+        fetch(variables.API_URL + 'Contact',
+        {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                CustomerId: this.props.activeCustomer.CustomerId,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                PhoneNumber: this.state.PhoneNumber,
+                Email: this.state.Email
             })
+        }).then(response => response.json())
+        .then((returnedResponse) => {
+            if(returnedResponse){
+                alert('Submitted')
+                this.clearForm()
+            } else {
+                alert('Not Submitted')
+            }
+        }).catch(error => {
+            if (error) throw error;
+        })
     }
 
     render(){
         return(
-            <div className={this.state.component}>
-                <HeaderComponent component={this.state.component}/>
+            <div>
+                <HeaderComponent component={'Create Contact'}/>
                 <div className="component-body">
                     <div className="row">
                         <div className="col">
-                            <form>
+                            <form onSubmit={this.handleSubmit}>
                                 <div className="input-row">
                                     <label>First Name</label>
                                     <input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} required/>
