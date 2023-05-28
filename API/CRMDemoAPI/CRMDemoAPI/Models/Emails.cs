@@ -10,7 +10,6 @@ namespace CRMDemoAPI.Models
     {
         public int EmailId { get; set; }
         public int FlightId { get; set; }
-        public int CustomerId { get; set; }
         public string EmailName { get; set; }
         public string EmailSubjectTitle { get; set; }
         public string EmailBody { get; set; }

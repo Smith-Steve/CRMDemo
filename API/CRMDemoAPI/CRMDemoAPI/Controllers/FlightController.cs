@@ -22,7 +22,7 @@ namespace CRMDemoAPI.Controllers
         [HttpGet]
         public JsonResult GetAll()
         {
-            string getAllQuery = @"select FlightId, CustomerId, FlightName from dbo.Flights";
+            string getAllQuery = @"select FlightId, FlightName from dbo.Flights";
             DataTable table = new DataTable();
             string SqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
             SqlDataReader SqlDataReader;
@@ -44,7 +44,7 @@ namespace CRMDemoAPI.Controllers
         [HttpGet("flight/{id}")]
         public JsonResult getOne(int id)
         {
-            string getOneSqlQuery = @"select FlightId, CustomerId, FlightName from dbo.flights where FlightId = @FlightId";
+            string getOneSqlQuery = @"select FlightId, FlightName from dbo.flights where FlightId = @FlightId";
             DataTable table = new DataTable();
             string SqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
             SqlDataReader SqlDataReader;
@@ -64,10 +64,10 @@ namespace CRMDemoAPI.Controllers
         }
 
         [HttpPost]
-        public JsonResult PostCustomer(Flights flight)
+        public JsonResult PostFlight(Flights flight)
         {
-            string insertFlight = @"insert dbo.Flights (CustomerId, FlightName)
-                                    values (@CustomerId, @FlightName)";
+            string insertFlight = @"insert dbo.Flights (FlightName)
+                                    values (@FlightName)";
             DataTable table = new DataTable();
             string SqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
             SqlDataReader postReader;
@@ -76,7 +76,6 @@ namespace CRMDemoAPI.Controllers
                 postSqlConnection.Open();
                 using (SqlCommand postCommand = new SqlCommand(insertFlight, postSqlConnection))
                 {
-                    postCommand.Parameters.AddWithValue("@CustomerId", flight.CustomerId);
                     postCommand.Parameters.AddWithValue("@FlightName", flight.FlightName);
                     postReader = postCommand.ExecuteReader();
                     table.Load(postReader);
