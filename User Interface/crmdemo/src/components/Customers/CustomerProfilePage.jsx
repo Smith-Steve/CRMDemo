@@ -30,6 +30,8 @@ export default class CustomerProfilePage extends React.Component {
             .then(response => {
                 if(response) alert('contact removed')
                 this.getListOfContacts()
+                //Since we're just looking to get this application running - without best practices in mind - we're
+                // just going to run another API call.
             }).catch(error => console.error(error))
     }
 
