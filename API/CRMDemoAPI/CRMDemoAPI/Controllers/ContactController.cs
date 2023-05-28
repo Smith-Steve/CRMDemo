@@ -47,7 +47,7 @@ namespace CRMDemoAPI.Controllers
         [HttpGet("CustomerContacts/{id}")]
         public JsonResult getAllFromClient(int id)
         {
-            string getAllContactsByClientQuery = @"Select CustomerId, FirstName, LastName, Email, PhoneNumber 
+            string getAllContactsByClientQuery = @"Select ContactId, CustomerId, FirstName, LastName, Email, PhoneNumber 
                                                     from dbo.Contacts where CustomerId = @CustomerId";
             DataTable table = new DataTable();
             string SqlDataSource = _configuration.GetConnectionString(databaseSQLString);

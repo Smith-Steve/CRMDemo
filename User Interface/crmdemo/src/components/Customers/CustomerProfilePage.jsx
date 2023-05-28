@@ -24,14 +24,12 @@ export default class CustomerProfilePage extends React.Component {
             })
     }
 
-    deleteContact(){
-        
-    }
-
-    deleteCustomer(){
-        fetch(`${variables.API_URL}CustomerAPI/${this.props.activeCustomer.CustomerId}`, API_CALL_HEADER_DELETE_REQUEST)
+    removeContact(contactId){
+        const init = {method: 'Delete', headers: {'Content-Type': 'application/json'}}
+        fetch(`${variables.API_URL}Contact/Delete/${contactId}`, init)
             .then(response => {
-                if(response) alert('removed from flight');
+                if(response) alert('contact removed')
+                this.getListOfContacts()
             }).catch(error => console.error(error))
     }
 
@@ -47,7 +45,7 @@ export default class CustomerProfilePage extends React.Component {
 
     buildContactTable(customerContactList){
         const contactRow = customerContactList.map(contact => {
-            return <tr><td><span>{contact.FirstName + ' ' + contact.LastName}</span></td><td>{contact.Email}</td><td>{contact.PhoneNumber}</td><td><button className='rounded-corners contact-button'>Edit</button><button className='red rounded-corners contact-button'> Delete</button></td></tr>
+            return <tr><td><span>{contact.FirstName + ' ' + contact.LastName}</span></td><td>{contact.Email}</td><td>{contact.PhoneNumber}</td><td><button className='rounded-corners contact-button'>Edit</button><button className='red rounded-corners contact-button' onClick={() => this.removeContact(contact.ContactId)}> Delete</button></td></tr>
         })
 
         return(
