@@ -5,6 +5,7 @@ export default function Sidebar(){
         <div className="side-bar grey rounded-corners">
             <a href="/Home">Home</a>
             <a href='/Customers'>Customers</a>
+            <a href='/CreateContacts'>Create Customer</a>
             <a href='/Flights'>Flights</a>
         </div>
     )

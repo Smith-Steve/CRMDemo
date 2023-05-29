@@ -1,12 +1,10 @@
 import React from 'react';
-// import { variables } from '../Components/Library/API_URLS'
-import { variables } from '../../Library/API_URLS';
-import { API_CALL_HEADER_POST_REQUEST } from '../../Library/API_Call_Headers';
-// import APICalls from '../Library/API_Calls'
+import {createCustomer} from '../../Library/API_CALLS'
 
 export default class CreateCustomer extends React.Component {
     constructor(props) {
         super(props);
+        this.clearForm = this.clearForm.bind(this)
         this.state = { CustomerName: '', CustomerStreet1: '', CustomerCity: '', CustomerState: '', CustomerVertical: '', ComponentApiString: 'CustomerAPI'}
     }
 
@@ -21,35 +19,8 @@ export default class CreateCustomer extends React.Component {
     }
 
     handleSubmit = (event) => {
-        event.preventDefault();
-
-        //Fetch Call
-        fetch(variables.API_URL + this.state.ComponentApiString,
-            {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    CustomerName: this.state.CustomerName,
-                    CustomerStreet1: this.state.CustomerStreet1,
-                    CustomerCity: this.state.CustomerCity,
-                    CustomerState: this.state.CustomerState,
-                    CustomerVertical: this.state.CustomerVertical
-                })
-            }).then(
-                response => response.json()
-            ).then((returnedResponse) => {
-                if(returnedResponse){
-                    alert('Submitted')
-                    this.clearForm()
-                } else {
-                    alert('Not Submitted')
-                }
-            }).catch(error => {
-                if (error) throw error;
-            })
+        createCustomer(event, this.state)
+        this.clearForm()
     }
 
     handleChange = (event) => {

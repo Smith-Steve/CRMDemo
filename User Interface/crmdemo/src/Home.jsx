@@ -6,7 +6,7 @@ import CustomerProfilePage from './components/Customers/CustomerProfilePage';
 import Customers from './components/Customers/Customers';
 import CreateContact from './components/Customers/Contacts/CreateContact'
 import Flights from './components/Flights/Flights'
-import {BrowserRouter, Route, Switch, Routes} from 'react-router-dom'
+import {BrowserRouter} from 'react-router-dom'
 
 class Home extends React.Component {
   constructor(props) {

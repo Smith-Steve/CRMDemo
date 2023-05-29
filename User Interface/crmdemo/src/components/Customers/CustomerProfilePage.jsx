@@ -1,12 +1,14 @@
 import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders'
 import { variables } from '../../Library/API_URLS';
-import { API_CALL_HEADER_GET_REQUEST, API_CALL_HEADER_DELETE_REQUEST } from '../../Library/API_Call_Headers';
+import { removeContact } from '../../Library/API_CALLS'
+import { API_CALL_HEADER_GET_REQUEST} from '../../Library/API_Call_Headers';
 
 export default class CustomerProfilePage extends React.Component {
     constructor(props){
         super(props);
         this.setComponent = this.setComponent.bind(this);
+        this.deleteContact = this.deleteContact.bind(this)
         this.state = { component: 'Customer Profile Page', activeCustomer: this.props.activeCustomer.CustomerName, activeContactList:[] }
     }
 
@@ -24,15 +26,20 @@ export default class CustomerProfilePage extends React.Component {
             })
     }
 
-    removeContact(contactId){
-        const init = {method: 'Delete', headers: {'Content-Type': 'application/json'}}
-        fetch(`${variables.API_URL}Contact/Delete/${contactId}`, init)
-            .then(response => {
-                if(response) alert('contact removed')
-                this.getListOfContacts()
-                //Since we're just looking to get this application running - without best practices in mind - we're
-                // just going to run another API call.
-            }).catch(error => console.error(error))
+    deleteContact(deletedContact){
+        //function that deletes contact.
+        removeContact(deletedContact.ContactId)
+        //We will now remove the contact that was just deleted from the 'activeContactList'
+        //after it is removed, the component is re-rendered with the information from the
+        //deleted contact is removed.
+        this.setState(prevState => {
+            const indexOfContact = prevState.activeContactList.findIndex(
+                contact => contact.Email === deletedContact.Email);
+
+            const newContactList = [...prevState.activeContactList];
+            if(indexOfContact >= 0) newContactList.splice(indexOfContact, 1)
+            return {activeContactList: newContactList}
+        })
     }
 
     setComponent(){
@@ -47,7 +54,7 @@ export default class CustomerProfilePage extends React.Component {
 
     buildContactTable(customerContactList){
         const contactRow = customerContactList.map(contact => {
-            return <tr><td><span>{contact.FirstName + ' ' + contact.LastName}</span></td><td>{contact.Email}</td><td>{contact.PhoneNumber}</td><td><button className='rounded-corners contact-button'>Edit</button><button className='red rounded-corners contact-button' onClick={() => this.removeContact(contact.ContactId)}> Delete</button></td></tr>
+            return <tr><td><span>{contact.FirstName + ' ' + contact.LastName}</span></td><td>{contact.Email}</td><td>{contact.PhoneNumber}</td><td><button className='rounded-corners contact-button'>Edit</button><button className='red rounded-corners contact-button' onClick={() => this.deleteContact(contact)}> Delete</button></td></tr>
         })
 
         return(

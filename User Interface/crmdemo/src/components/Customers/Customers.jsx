@@ -53,8 +53,6 @@ export default class Customers extends React.Component {
     manageList(){
         let lowIndex = Math.floor(Math.random() * this.state.customerList.length - 5);
         let highIndex = lowIndex + 5;
-        console.log('low index: ', lowIndex)
-        console.log('high index: ', highIndex)
         if(lowIndex <= 0){
             lowIndex = 0
             highIndex = 5
