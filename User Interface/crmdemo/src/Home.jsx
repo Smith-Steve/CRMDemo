@@ -5,6 +5,7 @@ import CreateCustomer from './components/Customers/CreateCustomers';
 import CustomerProfilePage from './components/Customers/CustomerProfilePage';
 import Customers from './components/Customers/Customers';
 import CreateContact from './components/Customers/Contacts/CreateContact'
+import Flights from './components/Flights/Flights'
 import {BrowserRouter, Route, Switch, Routes} from 'react-router-dom'
 
 class Home extends React.Component {
@@ -34,6 +35,8 @@ class Home extends React.Component {
       return <CustomerProfilePage setComponent={this.setComponent} activeCustomer={this.state.activeCustomer} setActiveCustomer={this.setActiveCustomer}/>
     } else if (path === 'CreateContact'){
       return <CreateContact activeCustomer={this.state.activeCustomer}/>
+    } else if (path === 'Flights'){
+      return <Flights/>
     }
     return <HomeComponent/>
   }

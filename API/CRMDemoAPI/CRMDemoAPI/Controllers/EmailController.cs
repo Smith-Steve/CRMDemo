@@ -23,7 +23,7 @@ namespace CRMDemoAPI.Controllers
         [HttpGet]
         public JsonResult GetAll()
         {
-            string getAllQuery = @"select CustomerId, FlightId, EmailName, EmailSubjectTitle, EmailBody from dbo.Emails";
+            string getAllQuery = @"select FlightId, EmailName, EmailSubjectTitle, EmailBody from dbo.Emails";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
@@ -46,7 +46,7 @@ namespace CRMDemoAPI.Controllers
         [HttpGet("details/{id}")]
         public JsonResult getOne(int id)
         {
-            string getOneSqlQuery = @"select EmailId, CustomerId, FlightId, EmailName, EmailSubjectTitle, EmailBody 
+            string getOneSqlQuery = @"select EmailId, FlightId, EmailName, EmailSubjectTitle, EmailBody 
                                     from dbo.Emails where EmailId = @EmailId";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
@@ -71,8 +71,8 @@ namespace CRMDemoAPI.Controllers
         [HttpPost]
         public JsonResult PostEmail(Emails email)
         {
-            string insertEmail = @"insert into dbo.Emails (CustomerId, FlightId, EmailName, EmailSubjectTitle, EmailBody)
-                                   values(@CustomerId, @FlightId, @EmailName, @EmailSubjectTitle, @EmailBody)";
+            string insertEmail = @"insert into dbo.Emails (FlightId, EmailName, EmailSubjectTitle, EmailBody)
+                                   values(@FlightId, @EmailName, @EmailSubjectTitle, @EmailBody)";
             DataTable table= new DataTable();
             string sqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
             SqlDataReader postReader;
@@ -81,7 +81,6 @@ namespace CRMDemoAPI.Controllers
                 sqlConnection.Open();
                 using (SqlCommand postCommand = new SqlCommand(insertEmail, sqlConnection))
                 {
-                    postCommand.Parameters.AddWithValue("@CustomerId", email.CustomerId);
                     postCommand.Parameters.AddWithValue("@FlightId", email.FlightId);
                     postCommand.Parameters.AddWithValue("@EmailName", email.EmailName);
                     postCommand.Parameters.AddWithValue("@EmailSubjectTitle", email.EmailSubjectTitle);
@@ -96,9 +95,9 @@ namespace CRMDemoAPI.Controllers
         }
 
         [HttpPut]
-        public JsonResult PutCustomer(Emails email)
+        public JsonResult PutEmail(Emails email)
         {
-            string updateEmailSqlString = @"update dbo.Emails set CustomerId = @CustomerId, FlightId = @FlightId,
+            string updateEmailSqlString = @"update dbo.Emails set FlightId = @FlightId,
                                             EmailName = @EmailName, EmailSubjectTitle = @EmailSubjectTitle, EmailBody = @EmailBody where EmailId = @EmailId";
 
             DataTable table= new DataTable();
@@ -110,7 +109,6 @@ namespace CRMDemoAPI.Controllers
                 using (SqlCommand putCommand = new SqlCommand(updateEmailSqlString, SqlConnection))
                 {
                     putCommand.Parameters.AddWithValue("@EmailId", email.EmailId);
-                    putCommand.Parameters.AddWithValue("@CustomerId", email.CustomerId);
                     putCommand.Parameters.AddWithValue("@FlightId", email.FlightId);
                     putCommand.Parameters.AddWithValue("@EmailName", email.EmailName);
                     putCommand.Parameters.AddWithValue("@EmailSubjectTitle", email.EmailSubjectTitle);
