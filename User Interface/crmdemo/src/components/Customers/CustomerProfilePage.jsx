@@ -17,7 +17,7 @@ export default class CustomerProfilePage extends React.Component {
     }
 
     getListOfContacts() {
-        fetch(variables.API_URL + 'Contact/CustomerContacts/' + this.props.activeCustomer.CustomerId , API_CALL_HEADER_GET_REQUEST)
+        fetch("http://localhost:37844/api/Contact/CustomerContacts/" + this.props.activeCustomer.CustomerId , API_CALL_HEADER_GET_REQUEST)
             .then(response => response.json())
             .then(returnedResponse => {
                 this.setState({activeContactList: returnedResponse})

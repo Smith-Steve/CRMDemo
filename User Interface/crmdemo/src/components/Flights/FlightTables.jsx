@@ -9,3 +9,5 @@ function BlankTable(){
         </div>
     )
 }
+
+export {BlankTable}
