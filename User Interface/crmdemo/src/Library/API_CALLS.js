@@ -16,6 +16,27 @@ body: JSON.stringify({FlightName: newFlightName})})
         }).catch(error => console.error(error))
 }
 
+export function getListOfContacts(customerId){
+    fetch(`${baseUrl}Contact/CustomerContacts/${customerId}`, {method: 'GET', headers: {'Content-Type': 'application/json'}})
+        .then(response => response.json())
+        .then(returnedResponse => {
+            return returnedResponse
+        }).catch(error => {
+            if (error) console.error(error)
+        })
+}
+
+export function getFlights(){
+    const init = {method: 'GET', headers: { 'Content-Type': 'application/json'}}
+    fetch(`${baseUrl}Flight`, init)
+        .then(response => response.json())
+        .then(returnedResponse => {
+            console.log(returnedResponse[0])
+            console.log('hello')
+            return returnedResponse
+        }).catch(error => console.error(error))
+}
+
 export function createCustomer(event, customer){
     event.preventDefault();
     fetch(`${baseUrl}CustomerAPI`, { method: 'POST', headers: {'Content-Type': 'application/json'},

@@ -1,13 +1,20 @@
 import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders'
-import { createFlight } from '../../Library/API_CALLS'
+import {BlankTable} from './FlightTables'
+import { createFlight, getFlights } from '../../Library/API_CALLS'
+import variables from '../../Library/API_URLS'
 
 export default class Flights extends React.Component {
     constructor(props){
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.submitFlight = this.submitFlight.bind(this);
-        this.state = {Component: 'Flights', FlightName: ''}
+        this.state = {Component: 'Flights', FlightName: '', listOfFlights: []}
+    }
+
+    componentDidMount(){
+        this.getFlights()
+        //We are going to mount the flight list to state so we can work with a display that displays all flights. (5/29/2023)
     }
 
     handleChange(event){
@@ -15,8 +22,20 @@ export default class Flights extends React.Component {
         this.setState({[name]: event.target.value})
     }
 
+    getFlights = () => {
+        const init = {method: 'GET', headers: {'Content-Type': 'application/json'}}
+        fetch(`http://localhost:37844/api/Flight`, init)
+            .then(response => response.json())
+            .then(returnedResponse => {
+                this.setState({listOfFlights: returnedResponse})
+            }).catch(error => console.error(error))
+    }
+
     submitFlight(event){
         event.preventDefault();
+        const flightList = getFlights()
+        console.log('submit flights')
+        console.log(typeof flightList)
         createFlight(this.state.FlightName)
     }
 
@@ -35,6 +54,11 @@ export default class Flights extends React.Component {
                             <button onSubmit={this.submitFlight}>Enter Flight</button>
                         </div>
                     </form>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='col'>
+                    {BlankTable()}
                 </div>
             </div>
         </div>

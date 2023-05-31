@@ -1,7 +1,7 @@
 import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders'
 import { variables } from '../../Library/API_URLS';
-import { removeContact } from '../../Library/API_CALLS'
+import { removeContact, getListOfContacts } from '../../Library/API_CALLS'
 import { API_CALL_HEADER_GET_REQUEST} from '../../Library/API_Call_Headers';
 
 export default class CustomerProfilePage extends React.Component {
