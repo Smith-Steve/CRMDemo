@@ -1,8 +1,6 @@
 import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders'
-import { variables } from '../../Library/API_URLS';
 import { removeContact, getListOfContacts } from '../../Library/API_CALLS'
-import { API_CALL_HEADER_GET_REQUEST} from '../../Library/API_Call_Headers';
 
 export default class CustomerProfilePage extends React.Component {
     constructor(props){
@@ -13,17 +11,15 @@ export default class CustomerProfilePage extends React.Component {
     }
 
     componentDidMount(){
-        this.getListOfContacts()
+        this.getContactList()
     }
 
-    getListOfContacts() {
-        fetch("http://localhost:37844/api/Contact/CustomerContacts/" + this.props.activeCustomer.CustomerId , API_CALL_HEADER_GET_REQUEST)
-            .then(response => response.json())
-            .then(returnedResponse => {
-                this.setState({activeContactList: returnedResponse})
-            }).catch(error => {
-                if (error) console.log(error)
-            })
+    getContactList = () => {
+        getListOfContacts(this.props.activeCustomer.CustomerId).then((this.getContactListSuccess))
+    }
+
+    getContactListSuccess = (response) => {
+        this.setState({activeContactList: response})
     }
 
     deleteContact(deletedContact){

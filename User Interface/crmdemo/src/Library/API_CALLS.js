@@ -1,6 +1,9 @@
 import ClientError from './client-error';
 
 const baseUrl = 'http://localhost:37844/api/'
+const API_GET_HEADER = {
+    method: 'GET', headers: { 'Content-Type': 'application/json'}
+}
 
 export function removeContact(contactId) {
     if(typeof contactId !== 'number'){
@@ -24,16 +27,6 @@ export function createFlight(newFlightName){
         }).catch(error => console.error(error))
 }
 
-export function getListOfContacts(customerId){
-    fetch(`${baseUrl}Contact/CustomerContacts/${customerId}`, {method: 'GET', headers: {'Content-Type': 'application/json'}})
-        .then(response => response.json())
-        .then(returnedResponse => {
-            return returnedResponse
-        }).catch(error => {
-            if (error) console.error(error)
-        })
-}
-
 export function getFlights(){
     const init = {method: 'GET', headers: {'Content-Type': 'application/json'}}
     return fetch(`${baseUrl}Flight`, init)
@@ -43,13 +36,14 @@ export function getFlights(){
         }).catch(error => console.error(error))
 }
 
-// export function getFlights(){
-//     const init = {method: 'GET', headers: {'Content-Type': 'application/json'}}
-//     fetch(`${baseUrl}Flight`, init)
-//         .then((response) => {
-//             return response.json()
-//         }).catch(error => console.error(error))
-// }
+export function getListOfContacts(customerId){
+    const init = {method: 'GET', headers: {'Content-Type': 'application/json'}}
+    return fetch(`${baseUrl}Contact/CustomerContacts/` + customerId, init)
+        .then(response => response.json())
+        .then((returnedResponse) => {
+            return returnedResponse
+        }).catch(error => console.error(error))
+}
 
 export function createCustomer(event, customer){
     event.preventDefault();

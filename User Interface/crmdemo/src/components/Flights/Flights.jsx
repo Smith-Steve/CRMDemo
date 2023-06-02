@@ -18,7 +18,6 @@ export default class Flights extends React.Component {
     }
 
     getFlightDetails = () => {
-        console.log('We got it')
         getFlights().then((this.onGetFlightSuccess))
     }
 
@@ -30,15 +29,6 @@ export default class Flights extends React.Component {
         const name = event.target.name
         this.setState({[name]: event.target.value})
     }
-
-    // getFlights = () => {
-    //     const init = {method: 'GET', headers: {'Content-Type': 'application/json'}}
-    //     fetch(`http://localhost:37844/api/Flight`, init)
-    //         .then(response => response.json())
-    //         .then(returnedResponse => {
-    //             this.setState({listOfFlights: returnedResponse})
-    //         }).catch(error => console.error(error))
-    // }
 
     submitFlight(event){
         event.preventDefault();
