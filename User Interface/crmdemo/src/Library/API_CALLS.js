@@ -1,6 +1,11 @@
+import ClientError from './client-error';
+
 const baseUrl = 'http://localhost:37844/api/'
 
 export function removeContact(contactId) {
+    if(typeof contactId !== 'number'){
+        throw new ClientError('400', 'Please return a number.')
+    }
     const init = { method: 'DELETE', headers: {'Content-Type': 'application/json'}}
     fetch('http://localhost:37844/api/Contact/Delete/' + contactId, init)
         .then(response => {
@@ -33,7 +38,7 @@ export function getFlights(){
         .then(returnedResponse => {
             console.log(returnedResponse[0])
             console.log('hello')
-            return returnedResponse
+            return {returnedResponse}
         }).catch(error => console.error(error))
 }
 

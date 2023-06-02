@@ -13,8 +13,16 @@ export default class Flights extends React.Component {
     }
 
     componentDidMount(){
-        this.getFlights()
+        this.getFlightDetails()
         //We are going to mount the flight list to state so we can work with a display that displays all flights. (5/29/2023)
+    }
+
+    getFlightDetails = () => {
+        getFlights().then(this.onGetFlightSuccess)
+    }
+
+    onGetFlightSuccess = (response) => {
+        console.log(response)
     }
 
     handleChange(event){
@@ -22,20 +30,17 @@ export default class Flights extends React.Component {
         this.setState({[name]: event.target.value})
     }
 
-    getFlights = () => {
-        const init = {method: 'GET', headers: {'Content-Type': 'application/json'}}
-        fetch(`http://localhost:37844/api/Flight`, init)
-            .then(response => response.json())
-            .then(returnedResponse => {
-                this.setState({listOfFlights: returnedResponse})
-            }).catch(error => console.error(error))
-    }
+    // getFlights = () => {
+    //     const init = {method: 'GET', headers: {'Content-Type': 'application/json'}}
+    //     fetch(`http://localhost:37844/api/Flight`, init)
+    //         .then(response => response.json())
+    //         .then(returnedResponse => {
+    //             this.setState({listOfFlights: returnedResponse})
+    //         }).catch(error => console.error(error))
+    // }
 
     submitFlight(event){
         event.preventDefault();
-        const flightList = getFlights()
-        console.log('submit flights')
-        console.log(typeof flightList)
         createFlight(this.state.FlightName)
     }
 
