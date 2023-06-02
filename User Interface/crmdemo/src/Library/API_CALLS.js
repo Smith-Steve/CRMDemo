@@ -14,8 +14,11 @@ export function removeContact(contactId) {
 }
 
 export function createFlight(newFlightName){
+    if(typeof newFlightName !== "string"){
+        throw new ClientError('400', 'Please enter text')
+    }
     fetch(`${baseUrl}Flight`, { method: 'POST', headers: {'Content-Type': 'application/json'},
-body: JSON.stringify({FlightName: newFlightName})})
+            body: JSON.stringify({FlightName: newFlightName})})
         .then(response => {
             if(response) alert('Flight Added')
         }).catch(error => console.error(error))
@@ -32,15 +35,21 @@ export function getListOfContacts(customerId){
 }
 
 export function getFlights(){
-    const init = {method: 'GET', headers: { 'Content-Type': 'application/json'}}
-    fetch(`${baseUrl}Flight`, init)
-        .then(response => response.json())
-        .then(returnedResponse => {
-            console.log(returnedResponse[0])
-            console.log('hello')
-            return {returnedResponse}
+    const init = {method: 'GET', headers: {'Content-Type': 'application/json'}}
+    return fetch(`${baseUrl}Flight`, init)
+        .then((response) => response.json())
+        .then((returnedResponse) => {
+            return returnedResponse
         }).catch(error => console.error(error))
 }
+
+// export function getFlights(){
+//     const init = {method: 'GET', headers: {'Content-Type': 'application/json'}}
+//     fetch(`${baseUrl}Flight`, init)
+//         .then((response) => {
+//             return response.json()
+//         }).catch(error => console.error(error))
+// }
 
 export function createCustomer(event, customer){
     event.preventDefault();
