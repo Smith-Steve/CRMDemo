@@ -1,8 +1,6 @@
 import React from "react";
-import { variables } from "../../../Library/API_URLS";
-import { API_CALL_HEADER_POST_REQUEST } from "../../../Library/API_Call_Headers";
+import { createContactAPI } from '../../../Library/API_CALLS'
 import HeaderComponent from "../../HelperComponents/ComponentHeaders";
-import { json } from "react-router-dom";
 
 class CreateContact extends React.Component {
     constructor(props) {
@@ -10,7 +8,7 @@ class CreateContact extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.clearForm = this.clearForm.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.state = {component: 'Create Contact', firstName: '', lastName: '', PhoneNumber: '', Email: ''}
+        this.state = {firstName: '', lastName: '', PhoneNumber: '', Email: ''}
     }
 
     handleChange(event){
@@ -24,32 +22,8 @@ class CreateContact extends React.Component {
 
     handleSubmit(event){
         event.preventDefault();
-
-        fetch(variables.API_URL + 'Contact',
-        {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                CustomerId: this.props.activeCustomer.CustomerId,
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                PhoneNumber: this.state.PhoneNumber,
-                Email: this.state.Email
-            })
-        }).then(response => response.json())
-        .then((returnedResponse) => {
-            if(returnedResponse){
-                alert('Submitted')
-                this.clearForm()
-            } else {
-                alert('Not Submitted')
-            }
-        }).catch(error => {
-            if (error) throw error;
-        })
+        createContactAPI(this.props.activeCustomer.CustomerId, this.state)
+        this.clearForm()
     }
 
     render(){

@@ -1,7 +1,5 @@
 import React from 'react';
-import { variables } from '../../Library/API_URLS';
 import HeaderComponent from '../HelperComponents/ComponentHeaders'
-import { API_CALL_HEADER_GET_REQUEST } from '../../Library/API_Call_Headers';
 // import { variables } from '../Components/Library/API_URLS'
 
 export default class Customers extends React.Component {
@@ -20,7 +18,7 @@ export default class Customers extends React.Component {
     }
 
     getListOfCustomers() {
-        fetch(variables.API_URL + 'CustomerAPI', API_CALL_HEADER_GET_REQUEST)
+        fetch('http://localhost:37844/api/CustomerAPI',  {method: 'GET', headers: { 'Content-Type': 'application/json'}})
             .then(response => response.json())
             .then(returnedResponse => {
                 this.setState({customerList: returnedResponse})

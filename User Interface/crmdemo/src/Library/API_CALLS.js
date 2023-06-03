@@ -1,4 +1,5 @@
 import ClientError from './client-error';
+import Contact from './Contact'
 
 const baseUrl = 'http://localhost:37844/api/'
 const API_GET_HEADER = {
@@ -64,4 +65,23 @@ export function createCustomer(event, customer){
     }).catch(error => {
         if(error) throw error;
     })
+}
+
+export function createContactAPI(customerId, customer){
+    console.log(customerId)
+    const contactSubmission = new Contact(customerId, customer.firstName, customer.lastName, customer.PhoneNumber, customer.Email)
+    console.log(JSON.stringify(contactSubmission))
+    const init = {method: 'POST', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(contactSubmission)}
+    fetch(`${baseUrl}Contact`, init)
+        .then(response => response.json())
+        .then((returnedResponse) => {
+            if(returnedResponse){
+                alert('Submitted')
+            } else {
+                alert('Not Submitted')
+            }
+        }).catch(error => {
+            if(error) throw error;
+        })
 }

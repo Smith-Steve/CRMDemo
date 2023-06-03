@@ -27,7 +27,8 @@ export default class CustomerProfilePage extends React.Component {
         removeContact(deletedContact.ContactId)
         //We will now remove the contact that was just deleted from the 'activeContactList'
         //after it is removed, the component is re-rendered with the information from the
-        //deleted contact is removed.
+        //deleted contact is removed. It is done this way to remove the contact from the rendered list
+        // so we are not making additional API calls.
         this.setState(prevState => {
             const indexOfContact = prevState.activeContactList.findIndex(
                 contact => contact.Email === deletedContact.Email);
