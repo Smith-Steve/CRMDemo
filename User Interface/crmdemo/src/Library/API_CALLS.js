@@ -26,6 +26,17 @@ export function getFlights(){
         }).catch(error => console.error(error))
 }
 
+export function deleteFlight(flightId) {
+    if(typeof flightId !== 'number'){
+        throw new ClientError('400', 'Please return a number.')
+    }
+    const init = { method: 'DELETE', headers: {'Content-Type': 'application/json'}}
+    fetch('http://localhost:37844/api/Contact/Delete/' + flightId, init)
+        .then(response => {
+            if(response) alert('Flight Removed')
+        }).catch(error => console.error(error))
+}
+
 export function getListOfContacts(customerId){
     if(typeof customerId !== 'number'){
         ClientError('400', 'Please enter a number')
@@ -80,11 +91,12 @@ export function createContactAPI(customerId, customer){
 export function removeFlight(flightId){
     if(typeof flightId !== 'number') throw new ClientError('400', 'Please return number')
     const init = {method: 'DELETE', headers: {'Content-Type': 'application/json'}}
-    fetch(`${baseUrl}Flight/${flightId}`)
+    fetch(`${baseUrl}Flight/${flightId}`, init)
         .then(response => response.json())
         .then((returnedResponse) => {
             if(returnedResponse){
-                alert('Submitted')
+                alert('Flight Successfully Deleted')
+                console.log(returnedResponse)
             } else {
                 alert('Not Submitted')
             }

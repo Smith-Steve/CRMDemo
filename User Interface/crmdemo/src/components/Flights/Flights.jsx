@@ -1,7 +1,8 @@
 import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders';
-import {BlankTable, FlightTables} from './FlightTables';
-import { createFlight, getFlights } from '../../Library/API_CALLS';
+// import {BlankTable, FlightTables} from './FlightTables';
+import { BlankTable, FlightTables } from './Flight-Tables';
+import { createFlight, deleteFlight, getFlights, removeFlight } from '../../Library/API_CALLS';
 
 export default class Flights extends React.Component {
     constructor(props){
@@ -22,6 +23,25 @@ export default class Flights extends React.Component {
 
     onGetFlightSuccess = (response) => {
         this.setState({listOfFlights: response})
+    }
+
+    deleteFlight = (deletedFlightId) =>{
+        removeFlight(deletedFlightId)
+        this.removeFlightFromList(deletedFlightId)
+    }
+
+    removeFlightFromList = (deletedFlight) => {
+        this.setState(prevState => {
+            const indexOfFlight = prevState.listOfFlights.findIndex(
+                flight => flight.FlightId === deletedFlight
+            );
+
+            const newFlightList = [...prevState.listOfFlights];
+            if(indexOfFlight >= 0) newFlightList.splice(indexOfFlight, 1)
+            return {
+                listOfFlights: newFlightList
+            }
+        })
     }
 
     handleChange(event){
@@ -55,8 +75,8 @@ export default class Flights extends React.Component {
             </div>
             <div className='row'>
                 <div className='col'>
-                    {numberOfFlights > 1 ? FlightTables(this.state.listOfFlights) : BlankTable()}
-                    {/* {numberOfFlights > 1 ? <FlightTables listOfFlights={this.state.listOfFlights}/> : BlankTable()} */}
+                    {/* {numberOfFlights > 1 ? FlightTables(this.state.listOfFlights) : BlankTable()} */}
+                    {numberOfFlights > 1 ? <FlightTables listOfFlights={this.state.listOfFlights} deleteFlight={this.deleteFlight}/> : <BlankTable/>}
                 </div>
             </div>
         </div>
