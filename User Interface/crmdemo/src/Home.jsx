@@ -13,7 +13,8 @@ class Home extends React.Component {
     super(props);
     this.setActiveCustomer = this.setActiveCustomer.bind(this)
     this.setComponent = this.setComponent.bind(this)
-    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: JSON.parse(localStorage.getItem('Active-Customer') || null)}
+    this.setFlight = this.setFlight.bind(this)
+    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: JSON.parse(localStorage.getItem('Active-Customer') || null), activeFlight: null}
   }
 
   setActiveCustomer(selectedCustomer){
@@ -22,6 +23,10 @@ class Home extends React.Component {
 
   setComponent(component){
     this.setState({activeComponent: component})
+  }
+
+  setFlight(flight){
+    this.setState({activeFlight: flight})
   }
 
   renderComponent() {
@@ -36,7 +41,7 @@ class Home extends React.Component {
     } else if (path === 'CreateContact'){
       return <CreateContact activeCustomer={this.state.activeCustomer}/>
     } else if (path === 'Flights'){
-      return <Flights/>
+      return <Flights setFlight={this.setFlight}/>
     }
     return <HomeComponent/>
   }

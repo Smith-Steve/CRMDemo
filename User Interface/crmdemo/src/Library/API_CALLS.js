@@ -6,17 +6,6 @@ const API_GET_HEADER = {
     method: 'GET', headers: { 'Content-Type': 'application/json'}
 }
 
-export function removeContact(contactId) {
-    if(typeof contactId !== 'number'){
-        throw new ClientError('400', 'Please return a number.')
-    }
-    const init = { method: 'DELETE', headers: {'Content-Type': 'application/json'}}
-    fetch('http://localhost:37844/api/Contact/Delete/' + contactId, init)
-        .then(response => {
-            if(response) alert('contact removed')
-        }).catch(error => console.error(error))
-}
-
 export function createFlight(newFlightName){
     if(typeof newFlightName !== "string"){
         throw new ClientError('400', 'Please enter text')
@@ -38,6 +27,9 @@ export function getFlights(){
 }
 
 export function getListOfContacts(customerId){
+    if(typeof customerId !== 'number'){
+        ClientError('400', 'Please enter a number')
+    }
     const init = {method: 'GET', headers: {'Content-Type': 'application/json'}}
     return fetch(`${baseUrl}Contact/CustomerContacts/` + customerId, init)
         .then(response => response.json())
@@ -68,7 +60,6 @@ export function createCustomer(event, customer){
 }
 
 export function createContactAPI(customerId, customer){
-    console.log(customerId)
     const contactSubmission = new Contact(customerId, customer.firstName, customer.lastName, customer.PhoneNumber, customer.Email)
     console.log(JSON.stringify(contactSubmission))
     const init = {method: 'POST', headers: {'Content-Type': 'application/json'},
@@ -84,4 +75,31 @@ export function createContactAPI(customerId, customer){
         }).catch(error => {
             if(error) throw error;
         })
+}
+
+export function removeFlight(flightId){
+    if(typeof flightId !== 'number') throw new ClientError('400', 'Please return number')
+    const init = {method: 'DELETE', headers: {'Content-Type': 'application/json'}}
+    fetch(`${baseUrl}Flight/${flightId}`)
+        .then(response => response.json())
+        .then((returnedResponse) => {
+            if(returnedResponse){
+                alert('Submitted')
+            } else {
+                alert('Not Submitted')
+            }
+        }).catch(error => {
+            if(error) throw error;
+        })
+}
+
+export function removeContact(contactId) {
+    if(typeof contactId !== 'number'){
+        throw new ClientError('400', 'Please return a number.')
+    }
+    const init = { method: 'DELETE', headers: {'Content-Type': 'application/json'}}
+    fetch('http://localhost:37844/api/Contact/Delete/' + contactId, init)
+        .then(response => {
+            if(response) alert('contact removed')
+        }).catch(error => console.error(error))
 }

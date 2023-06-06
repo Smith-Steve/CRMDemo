@@ -8,16 +8,6 @@ export default class CreateCustomer extends React.Component {
         this.state = { CustomerName: '', CustomerStreet1: '', CustomerCity: '', CustomerState: '', CustomerVertical: '', ComponentApiString: 'CustomerAPI'}
     }
 
-    createNewCustomer(){
-        this.setState({
-            CustomerName: '',
-            CustomerStreet1: '',
-            CustomerCity: '',
-            CustomerState: '',
-            CustomerVertical: ''
-        })
-    }
-
     handleSubmit = (event) => {
         createCustomer(event, this.state)
         this.clearForm()

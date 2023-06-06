@@ -2,8 +2,33 @@ import React from 'react';
 
 function FlightTables(flightList){
     const flightRow = flightList.map(flight => {
-        <tr><td><span>{flight.FlightName}</span></td></tr>
+        return(
+            <tr>
+                <td>
+                    <span className='green'>{flight.FlightName}</span>
+                </td>
+                <td>
+                    <button className='rounded-corners contact-button'>Flight Set Up</button>
+                    <button className='red rounded-corners contact-button'>Delete Flight</button>
+                </td>
+            </tr>    
+        )
     })
+
+    return(
+        <div className='row'>
+            <div className='col'>
+                <table>
+                    <thead>
+                        <tr>Flight Name</tr>
+                    </thead>
+                    <tbody>
+                        {flightRow}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    )
 }
 function BlankTable(){
     return(
@@ -15,4 +40,4 @@ function BlankTable(){
     )
 }
 
-export {BlankTable}
+export {FlightTables, BlankTable}

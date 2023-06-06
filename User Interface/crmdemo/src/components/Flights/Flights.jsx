@@ -1,8 +1,7 @@
 import React from 'react';
-import HeaderComponent from '../HelperComponents/ComponentHeaders'
-import {BlankTable} from './FlightTables'
-import { createFlight, getFlights } from '../../Library/API_CALLS'
-import variables from '../../Library/API_URLS'
+import HeaderComponent from '../HelperComponents/ComponentHeaders';
+import {BlankTable, FlightTables} from './FlightTables';
+import { createFlight, getFlights } from '../../Library/API_CALLS';
 
 export default class Flights extends React.Component {
     constructor(props){
@@ -36,6 +35,8 @@ export default class Flights extends React.Component {
     }
 
     render(){
+        const numberOfFlights = this.state.listOfFlights.length
+        const flightList = this.state.listOfFlights
         return(
             <div className={this.state.Component}>
             <HeaderComponent component={this.state.Component}/>
@@ -54,7 +55,8 @@ export default class Flights extends React.Component {
             </div>
             <div className='row'>
                 <div className='col'>
-                    {BlankTable()}
+                    {numberOfFlights > 1 ? FlightTables(this.state.listOfFlights) : BlankTable()}
+                    {/* {numberOfFlights > 1 ? <FlightTables listOfFlights={this.state.listOfFlights}/> : BlankTable()} */}
                 </div>
             </div>
         </div>
