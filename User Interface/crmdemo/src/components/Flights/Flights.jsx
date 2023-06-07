@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders';
 // import {BlankTable, FlightTables} from './FlightTables';
 import { BlankTable, FlightTables } from './Flight-Tables';
-import { createFlight, deleteFlight, getFlights, removeFlight } from '../../Library/API_CALLS';
+import { createFlight, getFlights, removeFlight } from '../../Library/API_CALLS';
 
 export default class Flights extends React.Component {
     constructor(props){
@@ -52,11 +52,11 @@ export default class Flights extends React.Component {
     submitFlight(event){
         event.preventDefault();
         createFlight(this.state.FlightName)
+        this.getFlightDetails()
     }
 
     render(){
         const numberOfFlights = this.state.listOfFlights.length
-        const flightList = this.state.listOfFlights
         return(
             <div className={this.state.Component}>
             <HeaderComponent component={this.state.Component}/>

@@ -2,18 +2,16 @@ import ClientError from './client-error';
 import Contact from './Contact'
 
 const baseUrl = 'http://localhost:37844/api/'
-const API_GET_HEADER = {
-    method: 'GET', headers: { 'Content-Type': 'application/json'}
-}
 
 export function createFlight(newFlightName){
     if(typeof newFlightName !== "string"){
         throw new ClientError('400', 'Please enter text')
     }
-    fetch(`${baseUrl}Flight`, { method: 'POST', headers: {'Content-Type': 'application/json'},
+    return fetch(`${baseUrl}Flight`, { method: 'POST', headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({FlightName: newFlightName})})
         .then(response => {
             if(response) alert('Flight Added')
+            return response
         }).catch(error => console.error(error))
 }
 
