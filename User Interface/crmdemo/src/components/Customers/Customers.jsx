@@ -1,6 +1,5 @@
 import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders'
-// import { variables } from '../Components/Library/API_URLS'
 
 export default class Customers extends React.Component {
     constructor(props){

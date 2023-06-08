@@ -30,6 +30,10 @@ export default class Flights extends React.Component {
         this.removeFlightFromList(deletedFlightId)
     }
 
+    clearForm = () => {
+        this.setState({flightName: ''})
+    }
+
     removeFlightFromList = (deletedFlight) => {
         this.setState(prevState => {
             const indexOfFlight = prevState.listOfFlights.findIndex(
@@ -52,7 +56,27 @@ export default class Flights extends React.Component {
     submitFlight(event){
         event.preventDefault();
         createFlight(this.state.FlightName)
-        this.getFlightDetails()
+        this.addFlight(this.state.FlightName)
+        this.clearForm()
+    }
+
+    addFlight = (newFlight) => {
+        let lastElementNumber = this.state.listOfFlights.length - 1;
+        let lastNumber = this.state.listOfFlights[lastElementNumber].FlightId
+        console.log(lastNumber)
+        const insertedFlight = {FlightId: lastNumber + 1, FlightName: newFlight}
+        //This is not the appropriate way to be entering this. But since we're just looking to get moving, we'll leave this as is
+        this.setState(state => {
+            const updateFlightList = [insertedFlight, ...this.state.listOfFlights];
+            return {
+                listOfFlights: updateFlightList
+            }
+        })
+    }
+
+    setActiveFlight = (flight) => {
+        this.props.setFlight(flight)
+        this.props.setComponent('Flights/FlightConfiguration')
     }
 
     render(){
@@ -75,8 +99,7 @@ export default class Flights extends React.Component {
             </div>
             <div className='row'>
                 <div className='col'>
-                    {/* {numberOfFlights > 1 ? FlightTables(this.state.listOfFlights) : BlankTable()} */}
-                    {numberOfFlights > 1 ? <FlightTables listOfFlights={this.state.listOfFlights} deleteFlight={this.deleteFlight}/> : <BlankTable/>}
+                    {numberOfFlights > 0 ? <FlightTables setActiveFlight={this.setActiveFlight} listOfFlights={this.state.listOfFlights} deleteFlight={this.deleteFlight}/> : <BlankTable/>}
                 </div>
             </div>
         </div>

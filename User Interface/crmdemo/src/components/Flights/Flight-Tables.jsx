@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FlightTables({listOfFlights, deleteFlight}){
+function FlightTables({listOfFlights, deleteFlight, setActiveFlight}){
     const flightRow = listOfFlights.map(flight => {
         return(
         <tr>
@@ -8,7 +8,7 @@ function FlightTables({listOfFlights, deleteFlight}){
                 <span className='green'>{flight.FlightName}</span>
             </td>
             <td>
-                <button className='rounded-corners contact-button'>Flight Set Up</button>
+                <button className='rounded-corners contact-button' onClick={function (){setActiveFlight(flight)}}>Flight Set Up</button>
                 <button onClick={function () {deleteFlight(flight.FlightId)}} className='red rounded-corners contact-button'>Delete Flight</button>
             </td>
         </tr>)

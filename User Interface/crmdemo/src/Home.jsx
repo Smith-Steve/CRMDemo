@@ -41,7 +41,9 @@ class Home extends React.Component {
     } else if (path === 'CreateContact'){
       return <CreateContact activeCustomer={this.state.activeCustomer}/>
     } else if (path === 'Flights'){
-      return <Flights setFlight={this.setFlight}/>
+      return <Flights setFlight={this.setFlight} setComponent={this.setComponent}/>
+    } else if (path === 'Flights/FlightConfiguration') {
+      return <HomeComponent/>
     }
     return <HomeComponent/>
   }
