@@ -6,6 +6,7 @@ import CustomerProfilePage from './components/Customers/CustomerProfilePage';
 import Customers from './components/Customers/Customers';
 import CreateContact from './components/Customers/Contacts/CreateContact'
 import Flights from './components/Flights/Flights'
+import FlightPage from './components/Flights/FlightPage';
 import {BrowserRouter} from 'react-router-dom'
 
 class Home extends React.Component {
@@ -44,7 +45,7 @@ class Home extends React.Component {
       return <Flights setFlight={this.setFlight} setComponent={this.setComponent}/>
     } else if (path === 'Flights/FlightConfiguration') {
       //FlightConfiguration has not been configured yet. Therefore this path returns to the home component.
-      return <HomeComponent/>
+      return <FlightPage activeFlight={this.state.activeFlight}/>
     }
     return <HomeComponent/>
   }

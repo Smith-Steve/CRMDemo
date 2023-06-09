@@ -33,6 +33,15 @@ export function getContacts(){
         }).catch(error => console.error(error))
 }
 
+export function getAllFromFlight(id){
+    const init = {method : 'GET', headers: {'Content-Type': 'application/json'}}
+    return fetch(`${baseUrl}Flight/${id}`, init)
+        .then((response) => response.json())
+        .then((returnedResponse) => {
+            return returnedResponse
+        }).catch(error => console.error(error))
+}
+
 export function deleteFlight(flightId) {
     if(typeof flightId !== 'number'){
         throw new ClientError('400', 'Please return a number.')
