@@ -37,9 +37,7 @@ export default class Flights extends React.Component {
     removeFlightFromList = (deletedFlight) => {
         this.setState(prevState => {
             const indexOfFlight = prevState.listOfFlights.findIndex(
-                flight => flight.FlightId === deletedFlight
-            );
-
+                flight => flight.FlightId === deletedFlight);
             const newFlightList = [...prevState.listOfFlights];
             if(indexOfFlight >= 0) newFlightList.splice(indexOfFlight, 1)
             return {
@@ -57,7 +55,6 @@ export default class Flights extends React.Component {
         event.preventDefault();
         createFlight(this.state.FlightName)
         this.addFlight(this.state.FlightName)
-        this.clearForm()
     }
 
     addFlight = (newFlight) => {
@@ -72,6 +69,7 @@ export default class Flights extends React.Component {
                 listOfFlights: updateFlightList
             }
         })
+        this.clearForm()
     }
 
     setActiveFlight = (flight) => {

@@ -23,7 +23,7 @@ namespace CRMDemoAPI.Controllers
         [HttpGet]
         public JsonResult GetAll()
         {
-            string getAllQuery = @"select FlightId, EmailName, EmailSubjectTitle, EmailBody from dbo.Emails";
+            string getAllQuery = @"select EmailId, FlightId, EmailName, EmailSubjectTitle, EmailBody, SendOn, CreatedAt, SentAt, EmailNumberInSequence";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
@@ -43,30 +43,29 @@ namespace CRMDemoAPI.Controllers
             return new JsonResult(table);
         }
 
-        [HttpGet("details/{id}")]
-        public JsonResult getOne(int id)
+        [HttpGet("Flight/{id}")]
+        public JsonResult getAllFromFlight(int id)
         {
-            string getOneSqlQuery = @"select EmailId, FlightId, EmailName, EmailSubjectTitle, EmailBody 
-                                    from dbo.Emails where EmailId = @EmailId";
+            string getAllFromFlight = @"Select EmailId, FlightId, EmailName, EmailSubjectTitle, EmailBody, SendOn, CreatedAt, SentAt, EmailNumberInSequence
+                                        from dbo.Emails where FlightId = @FlightId";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
-            SqlDataReader getOneReader;
-            using (SqlConnection getOneSqlConnection = new SqlConnection(sqlDataSource))
-            {
-                getOneSqlConnection.Open();
-                using (SqlCommand getOneCommand = new SqlCommand(getOneSqlQuery, getOneSqlConnection))
-                {
-                    getOneCommand.Parameters.AddWithValue("@EmailId", id);
+            SqlDataReader getAllFlightReader;
 
-                    getOneReader = getOneCommand.ExecuteReader();
-                    table.Load(getOneReader);
-                    getOneReader.Close();
-                    getOneSqlConnection.Close();
+            using (SqlConnection getAllEmailsFlightConnection = new SqlConnection(sqlDataSource))
+            {
+                getAllEmailsFlightConnection.Open();
+                using(SqlCommand getEmailsByFlightCommand = new SqlCommand(getAllFromFlight, getAllEmailsFlightConnection))
+                {
+                    getEmailsByFlightCommand.Parameters.AddWithValue("@FlightId", id);
+                    getAllFlightReader = getEmailsByFlightCommand.ExecuteReader();
+                    table.Load(getAllFlightReader);
+                    getAllFlightReader.Close();
+                    getAllEmailsFlightConnection.Close();
                 }
             }
             return new JsonResult(table);
         }
-
 
         [HttpPost]
         public JsonResult PostEmail(Emails email)

@@ -24,6 +24,15 @@ export function getFlights(){
         }).catch(error => console.error(error))
 }
 
+export function getContacts(){
+    const init = {method: 'GET', headers: {'Content-Type': 'application/json'}}
+    return fetch(`${baseUrl}CustomerAPI`, init)
+        .then((response) => response.json())
+        .then((returnedResponse) => {
+            return returnedResponse
+        }).catch(error => console.error(error))
+}
+
 export function deleteFlight(flightId) {
     if(typeof flightId !== 'number'){
         throw new ClientError('400', 'Please return a number.')

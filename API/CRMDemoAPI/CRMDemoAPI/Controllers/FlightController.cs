@@ -86,5 +86,27 @@ namespace CRMDemoAPI.Controllers
             return new JsonResult($"Flight '{flight.FlightName}' added.");
         }
 
+        [HttpDelete("{id}")]
+        public JsonResult DeleteFlight(int id)
+        {
+            string deleteQuery = @"delete from dbo.Flights where FlightId=@FlightId";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
+            SqlDataReader deleteReader;
+            using (SqlConnection deleteSqlConnection = new SqlConnection(sqlDataSource))
+            {
+                deleteSqlConnection.Open();
+                using (SqlCommand deleteCommand = new SqlCommand(deleteQuery, deleteSqlConnection))
+                {
+                    deleteCommand.Parameters.AddWithValue("@FlightId", id);
+
+                    deleteReader = deleteCommand.ExecuteReader();
+                    table.Load(deleteReader);
+                    deleteReader.Close();
+                    deleteSqlConnection.Close();
+                }
+            }
+            return new JsonResult("Delete Successful");
+        }
     }
 }

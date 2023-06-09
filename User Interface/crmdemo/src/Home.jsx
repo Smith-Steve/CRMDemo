@@ -43,6 +43,7 @@ class Home extends React.Component {
     } else if (path === 'Flights'){
       return <Flights setFlight={this.setFlight} setComponent={this.setComponent}/>
     } else if (path === 'Flights/FlightConfiguration') {
+      //FlightConfiguration has not been configured yet. Therefore this path returns to the home component.
       return <HomeComponent/>
     }
     return <HomeComponent/>
