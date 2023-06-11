@@ -15,11 +15,17 @@ export default class CustomerProfilePage extends React.Component {
     }
 
     getContactList = () => {
-        getListOfContacts(this.props.activeCustomer.CustomerId).then((this.getContactListSuccess))
+        getListOfContacts(this.props.activeCustomer.CustomerId)
+            .then((this.getContactListSuccess))
+            .catch((this.getContactListError))
     }
 
     getContactListSuccess = (response) => {
         this.setState({activeContactList: response})
+    }
+
+    getContactListError = (response) => {
+        console.log('Error Message: ', response)
     }
 
     deleteContact(deletedContact){
@@ -34,6 +40,11 @@ export default class CustomerProfilePage extends React.Component {
         })
     }
 
+    editContact = (contact) => {
+        this.props.setActiveContact(contact)
+        this.setComponent()
+    }
+
     setComponent(){
         this.props.setComponent('CreateContact')
     }
@@ -44,9 +55,9 @@ export default class CustomerProfilePage extends React.Component {
         return returnDate
     }
 
-    buildContactTable(customerContactList){
+    buildContactTable(customerContactList, editContact){
         const contactRow = customerContactList.map(contact => {
-            return <tr><td><span>{contact.FirstName + ' ' + contact.LastName}</span></td><td>{contact.Email}</td><td>{contact.PhoneNumber}</td><td><button className='rounded-corners contact-button'>Edit</button><button className='red rounded-corners contact-button' onClick={() => this.deleteContact(contact)}> Delete</button></td></tr>
+            return <tr><td><span>{contact.FirstName + ' ' + contact.LastName}</span></td><td>{contact.Email}</td><td>{contact.PhoneNumber}</td><td><button className='rounded-corners contact-button' onClick={function(){editContact(contact)}}>Edit</button><button className='red rounded-corners contact-button' onClick={() => this.deleteContact(contact)}> Delete</button></td></tr>
         })
 
         return(
@@ -93,7 +104,7 @@ export default class CustomerProfilePage extends React.Component {
                             <div className='col'>
                                 <b>Organization Detail:</b>
                                 <div className='center'>
-                                    <button className='rounded-corners customer-profile-button'>Edit Customer</button> <button onClick={this.setComponent} className='rounded-corners customer-profile-button'>Add Contact</button> <button className='red rounded-corners customer-profile-button'> Delete Customer</button>
+                                    <button className='rounded-corners customer-profile-button' onClick={this.setComponent}>Edit Customer</button> <button onClick={this.setComponent} className='rounded-corners customer-profile-button'>Add Contact</button> <button className='red rounded-corners customer-profile-button'> Delete Customer</button>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +155,7 @@ export default class CustomerProfilePage extends React.Component {
                         </div>
                     </div>
                     <div className='Component-Element-Container'>
-                        {contactList.length > 0 ? this.buildContactTable(contactList) : null}
+                        {contactList.length > 0 ? this.buildContactTable(contactList, this.editContact) : null}
                     </div>
                 </div>
             </div>

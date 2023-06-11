@@ -38,7 +38,7 @@ export default class Customers extends React.Component {
                 <p>{customer.CustomerStreet1}</p>
             </div>
         )
-        //treating customer name to replacde spaces.
+        //treating customer name to replace spaces.
         //return to work here to continue. Trying to capture selected element so it can be passed into props/state.
     }
 

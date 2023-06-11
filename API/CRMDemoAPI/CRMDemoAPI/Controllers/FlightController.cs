@@ -41,7 +41,7 @@ namespace CRMDemoAPI.Controllers
             return new JsonResult(table);
         }
 
-        [HttpGet("flight/{id}")]
+        [HttpGet("{id}")]
         public JsonResult getOne(int id)
         {
             string getOneSqlQuery = @"select FlightId, FlightName from dbo.flights where FlightId = @FlightId";

@@ -116,28 +116,28 @@ namespace CRMDemoAPI.Controllers
             }
             return new JsonResult($"Contact {contact.FirstName} {contact.LastName} added.");
         }
-        [HttpPut]
+        [HttpPut("Update")]
         public JsonResult PutContact(Contacts contact)
         {
             string updateContactSqlString = @"update dbo.Contacts set FirstName = @FirstName, LastName = @LastName, Email = @Email, PhoneNumber = @PhoneNumber
-                                            where CustomerId = @CustomerId and ContactId = @ContactId";
+                                            where ContactId = @ContactId";
+
             DataTable table = new DataTable();
             string SqlDataSource = _configuration.GetConnectionString(databaseSQLString);
-            SqlDataReader postContactReader;
+            SqlDataReader putReader;
             using (SqlConnection putSqlConnection = new SqlConnection(SqlDataSource))
             {
                 putSqlConnection.Open();
                 using (SqlCommand putCommand = new SqlCommand(updateContactSqlString, putSqlConnection))
                 {
-                    putCommand.Parameters.AddWithValue("@CustomerId", contact.CustomerId);
                     putCommand.Parameters.AddWithValue("@ContactId", contact.ContactId);
                     putCommand.Parameters.AddWithValue("@FirstName", contact.FirstName);
                     putCommand.Parameters.AddWithValue("@LastName", contact.LastName);
                     putCommand.Parameters.AddWithValue("@Email", contact.Email);
                     putCommand.Parameters.AddWithValue("@PhoneNumber", contact.PhoneNumber);
-                    postContactReader = putCommand.ExecuteReader();
-                    table.Load(postContactReader);
-                    postContactReader.Close();
+                    putReader = putCommand.ExecuteReader();
+                    table.Load(putReader);
+                    putReader.Close();
                     putSqlConnection.Close();
                 }
             }

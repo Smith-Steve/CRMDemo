@@ -24,6 +24,15 @@ export function getFlights(){
         }).catch(error => console.error(error))
 }
 
+export function getOneFlight(flightId){
+    const init = {method: 'GET', headers: {'Content-Type': 'application/json'}}
+    return fetch(`${baseUrl}Flight/${flightId}`, init)
+        .then((response) => response.json())
+        .then((returnedResponse) => {
+            return returnedResponse
+        }).catch(error => console.error(error))
+}
+
 export function getContacts(){
     const init = {method: 'GET', headers: {'Content-Type': 'application/json'}}
     return fetch(`${baseUrl}CustomerAPI`, init)
@@ -35,9 +44,10 @@ export function getContacts(){
 
 export function getAllFromFlight(id){
     const init = {method : 'GET', headers: {'Content-Type': 'application/json'}}
-    return fetch(`${baseUrl}Flight/${id}`, init)
+    return fetch(`${baseUrl}Email/Flight/${id}`, init)
         .then((response) => response.json())
         .then((returnedResponse) => {
+            if(returnedResponse.length === 0) returnedResponse.push(null)
             return returnedResponse
         }).catch(error => console.error(error))
 }
@@ -87,8 +97,7 @@ export function createCustomer(event, customer){
 }
 
 export function createContactAPI(customerId, customer){
-    const contactSubmission = new Contact(customerId, customer.firstName, customer.lastName, customer.PhoneNumber, customer.Email)
-    console.log(JSON.stringify(contactSubmission))
+    const contactSubmission = new Contact(customerId, customer.FirstName, customer.LastName, customer.PhoneNumber, customer.Email)
     const init = {method: 'POST', headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(contactSubmission)}
     fetch(`${baseUrl}Contact`, init)
@@ -96,6 +105,28 @@ export function createContactAPI(customerId, customer){
         .then((returnedResponse) => {
             if(returnedResponse){
                 alert('Submitted')
+            } else {
+                alert('Not Submitted')
+            }
+        }).catch(error => {
+            if(error) throw error;
+        })
+}
+
+export function updateContact(contact){
+    const init = {method: 'PUT', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+        ContactId: contact.ContactId,
+        FirstName: contact.FirstName,
+        LastName: contact.LastName,
+        Email: contact.Email,
+        PhoneNumber: contact.PhoneNumber
+    })}
+    fetch(`${baseUrl}Contact/Update`, init)
+        .then(response => response.json())
+        .then((returnedResponse) => {
+            if(returnedResponse){
+                alert('Contact Updated')
             } else {
                 alert('Not Submitted')
             }

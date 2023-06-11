@@ -15,7 +15,7 @@ class Home extends React.Component {
     this.setActiveCustomer = this.setActiveCustomer.bind(this)
     this.setComponent = this.setComponent.bind(this)
     this.setFlight = this.setFlight.bind(this)
-    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: JSON.parse(localStorage.getItem('Active-Customer') || null), activeFlight: null}
+    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: JSON.parse(localStorage.getItem('Active-Customer') || null), activeFlight: null, activeContact: null}
   }
 
   setActiveCustomer(selectedCustomer){
@@ -30,6 +30,11 @@ class Home extends React.Component {
     this.setState({activeFlight: flight})
   }
 
+  setActiveContact = (contact) => {
+    console.log('setActiveContact invocation.')
+    this.setState({activeContact: contact})
+  }
+
   renderComponent() {
     const path = this.state.activeComponent;
     if(path === 'CreateContacts')
@@ -38,14 +43,16 @@ class Home extends React.Component {
     } else if (path === 'Customers') {
       return <Customers setActiveCustomer={this.setActiveCustomer}/>
     } else if (path.substring(0, path.indexOf('/')) === 'Customer') {
-      return <CustomerProfilePage setComponent={this.setComponent} activeCustomer={this.state.activeCustomer} setActiveCustomer={this.setActiveCustomer}/>
+      return <CustomerProfilePage setComponent={this.setComponent} activeCustomer={this.state.activeCustomer} setActiveCustomer={this.setActiveCustomer} setActiveContact={this.setActiveContact}/>
     } else if (path === 'CreateContact'){
-      return <CreateContact activeCustomer={this.state.activeCustomer}/>
+      return <CreateContact activeCustomer={this.state.activeCustomer} setComponent={this.setComponent} activeContact={this.state.activeContact}/>
     } else if (path === 'Flights'){
       return <Flights setFlight={this.setFlight} setComponent={this.setComponent}/>
     } else if (path === 'Flights/FlightConfiguration') {
       //FlightConfiguration has not been configured yet. Therefore this path returns to the home component.
       return <FlightPage activeFlight={this.state.activeFlight}/>
+    } else if (path === ''){
+
     }
     return <HomeComponent/>
   }

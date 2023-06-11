@@ -18,11 +18,16 @@ export default class Flights extends React.Component {
     }
 
     getFlightDetails = () => {
-        getFlights().then((this.onGetFlightSuccess))
+        getFlights().then((this.onGetFlightSuccess), 
+            (response) => console.log(response))
     }
 
     onGetFlightSuccess = (response) => {
         this.setState({listOfFlights: response})
+    }
+
+    onGetFlightFailure = (response) => {
+        console.log(response)
     }
 
     deleteFlight = (deletedFlightId) =>{
@@ -57,10 +62,9 @@ export default class Flights extends React.Component {
         this.addFlight(this.state.FlightName)
     }
 
-    addFlight = (newFlight) => {
+    addFlight = (newFlight, ) => {
         let lastElementNumber = this.state.listOfFlights.length - 1;
         let lastNumber = this.state.listOfFlights[lastElementNumber].FlightId
-        console.log(lastNumber)
         const insertedFlight = {FlightId: lastNumber + 1, FlightName: newFlight}
         //This is not the appropriate way to be entering this. But since we're just looking to get moving, we'll leave this as is
         this.setState(state => {
@@ -68,8 +72,8 @@ export default class Flights extends React.Component {
             return {
                 listOfFlights: updateFlightList
             }
-        })
-        this.clearForm()
+            //This is not being called - why?
+        }, this.clearForm())
     }
 
     setActiveFlight = (flight) => {
