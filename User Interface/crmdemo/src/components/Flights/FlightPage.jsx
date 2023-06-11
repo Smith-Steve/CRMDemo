@@ -24,6 +24,10 @@ class FlightPage extends React.Component {
         this.setState({emailList: response})
     }
 
+    setComponent = () => {
+        this.props.setComponent("EmailConfiguration")
+    }
+
     render(){
         return(
             <div className={this.state.Component}>
@@ -45,7 +49,7 @@ class FlightPage extends React.Component {
                         <div className='row'>
                             <div className='col'>
                                 <div className='center'>
-                                    <button className='rounded-corners customer-profile-button'>Edit Flight</button> <button className='rounded-corners customer-profile-button'>Add Email</button> <button className='red rounded-corners customer-profile-button'>Delete Email</button>
+                                    <button className='rounded-corners customer-profile-button'>Edit Flight</button> <button className='rounded-corners customer-profile-button' onClick={this.setComponent}>Add Email</button> <button className='red rounded-corners customer-profile-button'>Delete Email</button>
                                 </div>
                             </div>
                         </div>

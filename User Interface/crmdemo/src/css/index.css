@@ -41,7 +41,7 @@
   border-radius: 0.25rem;
 }
 
-input:hover {
+input:hover, textarea:hover {
   cursor: pointer;
   border: 0.188rem solid #04AA6D;
   box-shadow: 0 0 1px 1px #04AA6D;

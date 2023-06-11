@@ -8,6 +8,7 @@ import CreateContact from './components/Customers/Contacts/CreateContact'
 import Flights from './components/Flights/Flights'
 import FlightPage from './components/Flights/FlightPage';
 import {BrowserRouter} from 'react-router-dom'
+import EmailConfiguration from './components/Flights/EmailConfiguration';
 
 class Home extends React.Component {
   constructor(props) {
@@ -50,9 +51,9 @@ class Home extends React.Component {
       return <Flights setFlight={this.setFlight} setComponent={this.setComponent}/>
     } else if (path === 'Flights/FlightConfiguration') {
       //FlightConfiguration has not been configured yet. Therefore this path returns to the home component.
-      return <FlightPage activeFlight={this.state.activeFlight}/>
-    } else if (path === ''){
-
+      return <FlightPage activeFlight={this.state.activeFlight} setComponent={this.setComponent}/>
+    } else if (path === 'EmailConfiguration'){
+      return <EmailConfiguration/>
     }
     return <HomeComponent/>
   }
