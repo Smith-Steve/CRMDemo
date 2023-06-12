@@ -45,7 +45,7 @@ export default class EmailConfiguration extends React.Component {
                                 </div>
                                 <div className='input-row'>
                                     <label>Email Number In Sequence</label>
-                                    <input className='rounded-corners' type='text' name='EmailNumberInSequence' value={this.state.EmailNumberInSequence} onChange={this.handleChange} required></input>
+                                    <input className='rounded-corners' type='number' min="1" max="10" name='EmailNumberInSequence' value={this.state.EmailNumberInSequence} onChange={this.handleChange} required></input>
                                 </div>
                                 <div className='align-right'>
                                     <button onSubmit={this.handleSubmit}>Enter Email Into Flight</button>
