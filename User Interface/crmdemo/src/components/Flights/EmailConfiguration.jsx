@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders';
+import createEmail from '../../Library/API_CALLS'
 
 export default class EmailConfiguration extends React.Component {
     constructor(props){
@@ -41,7 +42,7 @@ export default class EmailConfiguration extends React.Component {
                                 </div>
                                 <div className='input-row'>
                                     <label>Send On</label>
-                                    <input className='rounded-corners' type='date' name='SendOn' value={this.state.SendOn} onChange={this.handleChange} required></input>
+                                    <input className='rounded-corners' type='time' name='SendOn' value={this.state.SendOn} onChange={this.handleChange} required></input>
                                 </div>
                                 <div className='input-row'>
                                     <label>Email Number In Sequence</label>
