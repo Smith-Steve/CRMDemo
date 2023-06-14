@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.ComponentModel.Design;
 using System.Data;
 using System.Data.SqlClient;
@@ -23,7 +24,8 @@ namespace CRMDemoAPI.Controllers
         [HttpGet]
         public JsonResult GetAll()
         {
-            string getAllQuery = @"select EmailId, FlightId, EmailName, EmailSubjectTitle, EmailBody, SendOn, CreatedAt, SentAt, EmailNumberInSequence";
+            string getAllQuery = @"select EmailId, FlightId, EmailName, EmailSubjectTitle, EmailBody, SendOn, CreatedAt, SentAt, EmailNumberInSequence
+                                   from dbo.Emails";
 
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
@@ -70,8 +72,9 @@ namespace CRMDemoAPI.Controllers
         [HttpPost]
         public JsonResult PostEmail(Emails email)
         {
-            string insertEmail = @"insert into dbo.Emails (FlightId, EmailName, EmailSubjectTitle, EmailBody)
-                                   values(@FlightId, @EmailName, @EmailSubjectTitle, @EmailBody)";
+
+            string insertEmail = @"insert into dbo.Emails (FlightId, EmailName, EmailSubjectTitle, EmailBody, SendOn, CreatedAt, SentAt, EmailNumberInSequence)
+			                        values(@FlightId, @EmailName, @EmailSubjectTitle, @EmailBody, @SendOn, @CreatedAt, @SentAt, @EmailNumberInSequence)";
             DataTable table= new DataTable();
             string sqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
             SqlDataReader postReader;
@@ -84,6 +87,10 @@ namespace CRMDemoAPI.Controllers
                     postCommand.Parameters.AddWithValue("@EmailName", email.EmailName);
                     postCommand.Parameters.AddWithValue("@EmailSubjectTitle", email.EmailSubjectTitle);
                     postCommand.Parameters.AddWithValue("@EmailBody", email.EmailBody);
+                    postCommand.Parameters.AddWithValue("@SendOn", email.SendOn);
+                    postCommand.Parameters.AddWithValue("@CreatedAt", DateTime.Now);
+                    postCommand.Parameters.AddWithValue("@SentAt", email.SentAt);
+                    postCommand.Parameters.AddWithValue("@EmailNumberInSequence", email.EmailNumberInSequence);
                     postReader = postCommand.ExecuteReader();
                     table.Load(postReader);
                     postReader.Close();

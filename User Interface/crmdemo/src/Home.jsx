@@ -16,7 +16,7 @@ class Home extends React.Component {
     this.setActiveCustomer = this.setActiveCustomer.bind(this)
     this.setComponent = this.setComponent.bind(this)
     this.setFlight = this.setFlight.bind(this)
-    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: JSON.parse(localStorage.getItem('Active-Customer') || null), activeFlight: null, activeContact: null}
+    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: JSON.parse(localStorage.getItem('Active-Customer') || null), activeFlight: null, activeContact: null, activeEmail: null}
   }
 
   setActiveCustomer(selectedCustomer){
@@ -31,8 +31,11 @@ class Home extends React.Component {
     this.setState({activeFlight: flight})
   }
 
+  setActiveEmail(email){
+    this.setState({activeEmail: email})
+  }
+
   setActiveContact = (contact) => {
-    console.log('setActiveContact invocation.')
     this.setState({activeContact: contact})
   }
 
@@ -53,7 +56,7 @@ class Home extends React.Component {
       //FlightConfiguration has not been configured yet. Therefore this path returns to the home component.
       return <FlightPage activeFlight={this.state.activeFlight} setComponent={this.setComponent}/>
     } else if (path === 'EmailConfiguration'){
-      return <EmailConfiguration/>
+      return <EmailConfiguration activeFlight={this.state.activeFlight}/>
     }
     return <HomeComponent/>
   }

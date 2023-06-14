@@ -12,6 +12,9 @@ class CreateContact extends React.Component {
     }
 
     componentDidMount(){
+        // On mounting this function checks for
+        // whether or not there is an active contact.
+        // If there is an active contact present in props, then the form is configured with the values entered.
         if(this.props.activeContact != null){
             this.setForm()
         }
@@ -61,59 +64,57 @@ class CreateContact extends React.Component {
                             <form onSubmit={this.props.ActiveContact != null ? this.handleUpdate : this.handleSubmit}>
                                 <div className="input-row">
                                     {
-                                        this.props.activeContact != null ? 
+                                        //Form dynamic in case where there is an update.
+                                        this.props.activeContact != null ?
                                         (<React.Fragment>
                                             <label>Update First Name</label>
-                                            <input type="text" name="FirstName" value={this.state.FirstName} onChange={this.handleChange} required/>
                                         </React.Fragment>)
                                         :
                                         (<React.Fragment>
                                             <label>First Name</label>
-                                            <input type="text" name="FirstName" value={this.state.FirstName} onChange={this.handleChange} required/>
                                         </React.Fragment>)
+                                        //Form dynamic in case where there is a new entry.
                                     }
+                                    <input type="text" name="FirstName" value={this.state.FirstName} onChange={this.handleChange} required/>
                                 </div>
                                 <div className="input-row">
                                     {
                                         this.props.activeContact != null ?
                                         (<React.Fragment>
                                             <label>Update Last Name</label>
-                                            <input type="text" name="LastName" value={this.state.LastName} onChange={this.handleChange} required/>
                                         </React.Fragment>)
                                         :
                                         (<React.Fragment>
                                             <lable>Last Name</lable>
-                                            <input type="text" name="LastName" value={this.state.LastName} onChange={this.handleChange} required/>
                                         </React.Fragment>)
                                     }
+                                    <input type="text" name="LastName" value={this.state.LastName} onChange={this.handleChange} required/>
                                 </div>
                                 <div className="input-row">
                                     {
                                         this.props.activeContact != null ?
                                         (<React.Fragment>
                                             <label>Update Phone Number</label>
-                                            <input type="text" name="PhoneNumber" value={this.state.PhoneNumber} onChange={this.handleChange} required/>
                                         </React.Fragment>)
                                         :
                                         (<React.Fragment>
                                             <label>Phone Number</label>
-                                            <input type="text" name="PhoneNumber" value={this.state.PhoneNumber} onChange={this.handleChange} required/>
                                         </React.Fragment>)
                                     }
+                                    <input type="text" name="PhoneNumber" value={this.state.PhoneNumber} onChange={this.handleChange} required/>
                                 </div>
                                 <div className="input-row">
                                     {
                                         this.props.activeContact != null ?
                                         (<React.Fragment>
                                             <label>Update Email</label>
-                                            <input type="text" name="Email" value={this.state.Email} onChange={this.handleChange} required/>
                                         </React.Fragment>)
                                         :
                                         (<React.Fragment>
                                             <label>Email</label>
-                                            <input type="text" name="Email" value={this.state.Email} onChange={this.handleChange} required/>
                                         </React.Fragment>)
                                     }
+                                    <input type="text" name="Email" value={this.state.Email} onChange={this.handleChange} required/>
                                 </div>
                                 <div className='align-right'>
                                     {

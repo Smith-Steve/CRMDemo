@@ -113,6 +113,22 @@ export function createContactAPI(customerId, customer){
         })
 }
 
+export function createEmail(email) {
+    const init = {method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: email}
+    fetch(`${baseUrl}Email/`, init)
+        .then(response => response.json())
+        .then((returnedResponse) => {
+            if(returnedResponse){
+                alert('Submitted')
+            } else {
+                alert('Not Submitted')
+            }
+        }).catch(error => {
+            if(error) throw error;
+        })
+}
+
 export function updateContact(contact){
     const init = {method: 'PUT', headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({

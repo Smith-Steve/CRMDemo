@@ -1,21 +1,29 @@
 import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders';
-import createEmail from '../../Library/API_CALLS'
+import {createEmail} from '../../Library/API_CALLS'
+import Email from '../../Library/Email'
+
 
 export default class EmailConfiguration extends React.Component {
     constructor(props){
         super(props);
-        this.state = {Component: 'EmailConfiguration'}
+        this.state = {Component: 'EmailConfiguration', EmailName: '', EmailSubjectTitle: '', EmailBody: '', SendOn: '', EmailNumberInSequence: ''}
     }
-
     //Handle Submit Click
     handleSubmit = (event) => {
-        console.log(event)
+        event.preventDefault();
+        const emailSubmission = JSON.stringify(new Email(this.props.activeFlight.FlightId, this.state.EmailName, this.state.EmailSubjectTitle, this.state.EmailBody, this.state.SendOn, this.state.EmailNumberInSequence))
+        createEmail(emailSubmission)
+        this.clearForm()
     }
 
     handleChange = (event) => {
         const name = event.target.name;
         this.setState({[name] : event.target.value})
+    }
+
+    clearForm = () => {
+        this.setState({ EmailName: '', EmailSubjectTitle: '', EmailBody: '', SendOn: '', EmailNumberInSequence: ''})
     }
 
     render(){
@@ -42,7 +50,7 @@ export default class EmailConfiguration extends React.Component {
                                 </div>
                                 <div className='input-row'>
                                     <label>Send On</label>
-                                    <input className='rounded-corners' type='time' name='SendOn' value={this.state.SendOn} onChange={this.handleChange} required></input>
+                                    <input className='rounded-corners' type='datetime-local' name='SendOn' value={this.state.SendOn} onChange={this.handleChange} required></input>
                                 </div>
                                 <div className='input-row'>
                                     <label>Email Number In Sequence</label>
