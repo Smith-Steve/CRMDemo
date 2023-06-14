@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders';
-import {createEmail} from '../../Library/API_CALLS'
+import {createEmail, updateEmail} from '../../Library/API_CALLS'
 import Email from '../../Library/Email'
 
 

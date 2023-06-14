@@ -38,7 +38,6 @@ class CreateContact extends React.Component {
 
     handleSubmit(event){
         event.preventDefault();
-        console.log('Handle Submit: ', this.state)
         createContactAPI(this.props.activeCustomer.CustomerId, this.state)
         this.clearForm()
         this.props.setComponent('CreateContact')

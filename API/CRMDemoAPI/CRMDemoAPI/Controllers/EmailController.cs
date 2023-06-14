@@ -103,8 +103,8 @@ namespace CRMDemoAPI.Controllers
         [HttpPut]
         public JsonResult PutEmail(Emails email)
         {
-            string updateEmailSqlString = @"update dbo.Emails set FlightId = @FlightId,
-                                            EmailName = @EmailName, EmailSubjectTitle = @EmailSubjectTitle, EmailBody = @EmailBody where EmailId = @EmailId";
+            string updateEmailSqlString = @"update dbo.Emails set EmailName = @EmailName, EmailSubjectTitle = @EmailSubjectTitle, EmailBody = @EmailBody, SendOn = @SendOn, EmailNumberInSequence = @EmailNumberInSequence
+                                            where EmailId = @EmailId";
 
             DataTable table= new DataTable();
             string sqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
@@ -115,10 +115,11 @@ namespace CRMDemoAPI.Controllers
                 using (SqlCommand putCommand = new SqlCommand(updateEmailSqlString, SqlConnection))
                 {
                     putCommand.Parameters.AddWithValue("@EmailId", email.EmailId);
-                    putCommand.Parameters.AddWithValue("@FlightId", email.FlightId);
                     putCommand.Parameters.AddWithValue("@EmailName", email.EmailName);
                     putCommand.Parameters.AddWithValue("@EmailSubjectTitle", email.EmailSubjectTitle);
                     putCommand.Parameters.AddWithValue("@EmailBody", email.EmailBody);
+                    putCommand.Parameters.AddWithValue("@SendOn", email.SendOn);
+                    putCommand.Parameters.AddWithValue("@EmailNumberInSequence", email.EmailNumberInSequence);
                     putReader = putCommand.ExecuteReader();
                     table.Load(putReader);
                     putReader.Close();

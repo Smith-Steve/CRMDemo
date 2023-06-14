@@ -24,11 +24,42 @@ class FlightPage extends React.Component {
         this.setState({emailList: response})
     }
 
+    buildEmailTable = (flightEmailList) => {
+        const emailRow = flightEmailList.map(email => {
+            return <tr>
+                        <td><span>{email.EmailName}</span></td>
+                        <td>{email.EmailSubjectTitle}</td>
+                        <td>{email.SendOn}</td>
+                        <td><button className='rounded-corners contact-button'>Edit</button><button className='red rounded-corners contact-button'>Delete</button></td>
+                    </tr>
+        })
+        return(
+            <div className='row'>
+                <div className='col'>
+                    <table>
+                        <thead>
+                            <tr className='green'>
+                                <th>Email Name</th>
+                                <th>Email Subject</th>
+                                <th>Send On</th>
+                                <th>Buttons</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {emailRow}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        )
+    }
+
     setComponent = () => {
         this.props.setComponent("EmailConfiguration")
     }
 
     render(){
+        const emailList = this.state.emailList;
         return(
             <div className={this.state.Component}>
                 <HeaderComponent component={this.state.Component}/>
@@ -54,6 +85,9 @@ class FlightPage extends React.Component {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className='Component-Element-Container'>
+                    {emailList.length > 0 ? this.buildEmailTable(emailList) : null}
                 </div>
             </div>
         )
