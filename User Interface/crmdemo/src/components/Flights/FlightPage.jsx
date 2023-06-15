@@ -36,8 +36,7 @@ class FlightPage extends React.Component {
     }
 
     editEmail = (email) => {
-        console.log(email)
-        window.localStorage.setItem('Active-Email', JSON.stringify(email))
+        this.props.setActiveEmail(email)
         this.props.setComponent('EmailConfiguration')
     }
 

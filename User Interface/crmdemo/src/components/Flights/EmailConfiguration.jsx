@@ -11,12 +11,16 @@ export default class EmailConfiguration extends React.Component {
     }
 
     componentDidMount() {
-        console.log('Active-Email - ComponentDidMount: ', window.localStorage.getItem('Active-Email'))
+        if (this.props.ActiveEmail != null) this.setForm()
     }
 
-    componentWillUnmount() {
-
+    setForm = () => {
+        const { EmailId, FlightId, EmailName, EmailSubjectTitle, EmailBody, SendOn, SentAt } = this.props.ActiveEmail
+        this.setState((prevState) => {
+            return {... prevState, EmailId, FlightId, EmailName, EmailSubjectTitle, EmailBody, SendOn, SentAt}
+        }, this.stateChange)
     }
+
 
     generateEmailObject = () => {
         const email = JSON.stringify(new Email(this.props.activeFlight.FlightId, this.state.EmailName, this.state.EmailSubjectTitle, this.state.EmailBody, this.state.SendOn, this.state.EmailNumberInSequence))
@@ -47,12 +51,21 @@ export default class EmailConfiguration extends React.Component {
     }
 
     render(){
-        const activeEmail = JSON.parse(window.localStorage.getItem('Active-Email'))
-        console.log(typeof activeEmail, 'Active Email in Render Function')
         return(
             <div className={this.state.Component}>
                 <div className='center'>
-                    <h1 className='green'>Add Email</h1>
+                    {
+                        this.props.activeEmail != null ?
+                        (<React.Fragment>
+                            <h1 className='green'>Update Email</h1>
+                        </React.Fragment>)
+                        :
+                        (
+                            <React.Fragment>
+                                <h1 className='green'>Add Email</h1>
+                            </React.Fragment>
+                        )
+                    }
                 </div>
                 <div className='row'>
                     <div className='col'>

@@ -16,6 +16,7 @@ class Home extends React.Component {
     this.setActiveCustomer = this.setActiveCustomer.bind(this)
     this.setComponent = this.setComponent.bind(this)
     this.setFlight = this.setFlight.bind(this)
+    this.setActiveEmail = this.setActiveEmail.bind(this)
     this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: JSON.parse(localStorage.getItem('Active-Customer') || null), activeFlight: null, activeContact: null, activeEmail: null}
   }
 
@@ -53,9 +54,9 @@ class Home extends React.Component {
     } else if (path === 'Flights'){
       return <Flights setFlight={this.setFlight} setComponent={this.setComponent}/>
     } else if (path === 'Flights/FlightConfiguration') {
-      return <FlightPage activeFlight={this.state.activeFlight} setComponent={this.setComponent}/>
+      return <FlightPage activeFlight={this.state.activeFlight} setComponent={this.setComponent} setActiveEmail={this.setActiveEmail}/>
     } else if (path === 'EmailConfiguration'){
-      return <EmailConfiguration activeFlight={this.state.activeFlight} setActiveEmail={this.setActiveEmail}/>
+      return <EmailConfiguration activeFlight={this.state.activeFlight} activeEmail={this.state.activeEmail}/>
     }
     return <HomeComponent/>
   }
