@@ -5,7 +5,6 @@ import { getAllFromFlight, getOneFlight, deleteEmail } from '../../Library/API_C
 class FlightPage extends React.Component {
     constructor(props){
         super(props)
-        this.removeEmail = this.removeEmail.bind(this)
         this.state = {Component: 'Flight Page', emailList: []}
     }
 
@@ -24,18 +23,6 @@ class FlightPage extends React.Component {
         this.setState({emailList: response})
     }
 
-    // removeEmail(deletedEmail){
-    //     deleteEmail(deletedEmail.EmailId)
-    //     this.setState(prevState => {
-    //         const indexOfEmail = prevState.emailList.findIndex(
-    //             email => email.EmailId === deletedEmail.emailId
-    //         );
-    //         const newEmailList = [...prevState.emailList];
-    //         if(indexOfEmail >= 0) newEmailList.splice(indexOfEmail, 1)
-    //         return {emailList: newEmailList}
-    //     })
-    // }
-
     removeEmail = (deletedEmail) => {
         deleteEmail(deletedEmail.EmailId)
         this.setState(prevState => {
@@ -48,13 +35,20 @@ class FlightPage extends React.Component {
         })
     }
 
-    buildEmailTable = (flightEmailList) => {
+    editEmail = (email) => {
+        console.log(email)
+        window.localStorage.setItem('Active-Email', JSON.stringify(email))
+        let emailToPrint = localStorage.getItem('Active-Email')
+        console.log(emailToPrint)
+    }
+
+    buildEmailTable = (flightEmailList, editEmail) => {
         const emailRow = flightEmailList.map(email => {
             return <tr>
                         <td><span>{email.EmailName}</span></td>
                         <td>{email.EmailSubjectTitle}</td>
                         <td>{email.SendOn}</td>
-                        <td><button className='rounded-corners contact-button'>Edit</button><button className='red rounded-corners contact-button' onClick={() => this.removeEmail(email)}>Delete</button></td>
+                        <td><button className='rounded-corners contact-button' onClick={function (){editEmail(email)}}>Edit</button><button className='red rounded-corners contact-button' onClick={() => this.removeEmail(email)}>Delete</button></td>
                     </tr>
         })
         return(
@@ -111,7 +105,7 @@ class FlightPage extends React.Component {
                     </div>
                 </div>
                 <div className='Component-Element-Container'>
-                    {emailList.length > 0 ? this.buildEmailTable(emailList) : null}
+                    {emailList.length > 0 ? this.buildEmailTable(emailList, this.editEmail) : null}
                 </div>
             </div>
         )

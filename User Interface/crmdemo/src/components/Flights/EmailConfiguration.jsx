@@ -10,6 +10,10 @@ export default class EmailConfiguration extends React.Component {
         this.state = {Component: 'EmailConfiguration', EmailName: '', EmailSubjectTitle: '', EmailBody: '', SendOn: '', EmailNumberInSequence: '', editEmail: false}
     }
 
+    componentDidMount() {
+        console.log(localStorage.getItem('Active-Email'))
+    }
+
     generateEmailObject = () => {
         const email = JSON.stringify(new Email(this.props.activeFlight.FlightId, this.state.EmailName, this.state.EmailSubjectTitle, this.state.EmailBody, this.state.SendOn, this.state.EmailNumberInSequence))
         return email
@@ -29,6 +33,10 @@ export default class EmailConfiguration extends React.Component {
 
     clearForm = () => {
         this.setState({ EmailName: '', EmailSubjectTitle: '', EmailBody: '', SendOn: '', EmailNumberInSequence: ''})
+    }
+
+    setFormForUpdate = () => {
+
     }
 
     handleUpdate = (event) => {
