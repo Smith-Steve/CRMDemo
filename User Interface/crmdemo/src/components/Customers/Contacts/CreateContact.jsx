@@ -45,7 +45,6 @@ class CreateContact extends React.Component {
 
     handleUpdate = (event) => {
         event.preventDefault()
-        console.log('Handle Update: ', this.state)
         updateContact(this.state)
     }
 

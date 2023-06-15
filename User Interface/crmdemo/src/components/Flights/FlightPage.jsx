@@ -38,13 +38,12 @@ class FlightPage extends React.Component {
     editEmail = (email) => {
         console.log(email)
         window.localStorage.setItem('Active-Email', JSON.stringify(email))
-        let emailToPrint = localStorage.getItem('Active-Email')
-        console.log(emailToPrint)
+        this.props.setComponent('EmailConfiguration')
     }
 
     buildEmailTable = (flightEmailList, editEmail) => {
         const emailRow = flightEmailList.map(email => {
-            return <tr>
+            return <tr key={email.EmailId}>
                         <td><span>{email.EmailName}</span></td>
                         <td>{email.EmailSubjectTitle}</td>
                         <td>{email.SendOn}</td>

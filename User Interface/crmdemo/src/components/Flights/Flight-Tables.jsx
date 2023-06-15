@@ -3,7 +3,7 @@ import React from 'react';
 function FlightTables({listOfFlights, deleteFlight, setActiveFlight}){
     const flightRow = listOfFlights.map(flight => {
         return(
-        <tr>
+        <tr key={flight.FlightId}>
             <td>
                 <span className='green'>{flight.FlightName}</span>
             </td>

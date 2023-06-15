@@ -7,11 +7,15 @@ import Email from '../../Library/Email'
 export default class EmailConfiguration extends React.Component {
     constructor(props){
         super(props);
-        this.state = {Component: 'EmailConfiguration', EmailName: '', EmailSubjectTitle: '', EmailBody: '', SendOn: '', EmailNumberInSequence: '', editEmail: false}
+        this.state = {Component: 'EmailConfiguration', EmailName: '', EmailSubjectTitle: '', EmailBody: '', SendOn: '', EmailNumberInSequence: '', ActiveEmail: window.localStorage.getItem('Active-Email') || null}
     }
 
     componentDidMount() {
-        console.log(localStorage.getItem('Active-Email'))
+        console.log('Active-Email - ComponentDidMount: ', window.localStorage.getItem('Active-Email'))
+    }
+
+    componentWillUnmount() {
+
     }
 
     generateEmailObject = () => {
@@ -35,9 +39,7 @@ export default class EmailConfiguration extends React.Component {
         this.setState({ EmailName: '', EmailSubjectTitle: '', EmailBody: '', SendOn: '', EmailNumberInSequence: ''})
     }
 
-    setFormForUpdate = () => {
-
-    }
+    
 
     handleUpdate = (event) => {
         event.preventDefault()
@@ -45,6 +47,8 @@ export default class EmailConfiguration extends React.Component {
     }
 
     render(){
+        const activeEmail = JSON.parse(window.localStorage.getItem('Active-Email'))
+        console.log(typeof activeEmail, 'Active Email in Render Function')
         return(
             <div className={this.state.Component}>
                 <div className='center'>
