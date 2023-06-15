@@ -6,7 +6,9 @@ sales interactions through it.
 - Microsoft SQL (SQL)
 - C#
 - .NET
-- Javascript
+- Javascript (React)
+- HTML5
+- CSS3
 
 #Features:
 - Conditionally Rendered Components
