@@ -1,11 +1,11 @@
 import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders';
-import { getAllFromFlight, getOneFlight } from '../../Library/API_CALLS';
-import Email from '../../Library/email-post';
+import { getAllFromFlight, getOneFlight, deleteEmail } from '../../Library/API_CALLS';
 
 class FlightPage extends React.Component {
     constructor(props){
         super(props)
+        this.removeEmail = this.removeEmail.bind(this)
         this.state = {Component: 'Flight Page', emailList: []}
     }
 
@@ -24,13 +24,37 @@ class FlightPage extends React.Component {
         this.setState({emailList: response})
     }
 
+    // removeEmail(deletedEmail){
+    //     deleteEmail(deletedEmail.EmailId)
+    //     this.setState(prevState => {
+    //         const indexOfEmail = prevState.emailList.findIndex(
+    //             email => email.EmailId === deletedEmail.emailId
+    //         );
+    //         const newEmailList = [...prevState.emailList];
+    //         if(indexOfEmail >= 0) newEmailList.splice(indexOfEmail, 1)
+    //         return {emailList: newEmailList}
+    //     })
+    // }
+
+    removeEmail = (deletedEmail) => {
+        deleteEmail(deletedEmail.EmailId)
+        this.setState(prevState => {
+            const indexOfEmail = prevState.emailList.findIndex(
+                email => email.EmailId === deletedEmail.EmailId
+            );
+            const newEmailList = [...prevState.emailList];
+            if(indexOfEmail >= 0) newEmailList.splice(indexOfEmail,1)
+            return {emailList: newEmailList}
+        })
+    }
+
     buildEmailTable = (flightEmailList) => {
         const emailRow = flightEmailList.map(email => {
             return <tr>
                         <td><span>{email.EmailName}</span></td>
                         <td>{email.EmailSubjectTitle}</td>
                         <td>{email.SendOn}</td>
-                        <td><button className='rounded-corners contact-button'>Edit</button><button className='red rounded-corners contact-button'>Delete</button></td>
+                        <td><button className='rounded-corners contact-button'>Edit</button><button className='red rounded-corners contact-button' onClick={() => this.removeEmail(email)}>Delete</button></td>
                     </tr>
         })
         return(

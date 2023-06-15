@@ -7,12 +7,17 @@ import Email from '../../Library/Email'
 export default class EmailConfiguration extends React.Component {
     constructor(props){
         super(props);
-        this.state = {Component: 'EmailConfiguration', EmailName: '', EmailSubjectTitle: '', EmailBody: '', SendOn: '', EmailNumberInSequence: ''}
+        this.state = {Component: 'EmailConfiguration', EmailName: '', EmailSubjectTitle: '', EmailBody: '', SendOn: '', EmailNumberInSequence: '', editEmail: false}
+    }
+
+    generateEmailObject = () => {
+        const email = JSON.stringify(new Email(this.props.activeFlight.FlightId, this.state.EmailName, this.state.EmailSubjectTitle, this.state.EmailBody, this.state.SendOn, this.state.EmailNumberInSequence))
+        return email
     }
     //Handle Submit Click
     handleSubmit = (event) => {
         event.preventDefault();
-        const emailSubmission = JSON.stringify(new Email(this.props.activeFlight.FlightId, this.state.EmailName, this.state.EmailSubjectTitle, this.state.EmailBody, this.state.SendOn, this.state.EmailNumberInSequence))
+        const emailSubmission = this.generateEmailObject()
         createEmail(emailSubmission)
         this.clearForm()
     }
@@ -24,6 +29,11 @@ export default class EmailConfiguration extends React.Component {
 
     clearForm = () => {
         this.setState({ EmailName: '', EmailSubjectTitle: '', EmailBody: '', SendOn: '', EmailNumberInSequence: ''})
+    }
+
+    handleUpdate = (event) => {
+        event.preventDefault()
+        // updateEmail(email)
     }
 
     render(){

@@ -129,6 +129,40 @@ export function createEmail(email) {
         })
 }
 
+export function updateEmail(email){
+    const init = {method: 'PUT', headers: {'Content-Type': 'application/json'},
+                body: email}
+    fetch(`${baseUrl}`, init)
+        .then(response => response.json())
+        .then((returnedResponse) => {
+            if(returnedResponse){
+                alert('Contact Updated')
+            } else {
+                alert('Error: Not Updated')
+            }
+        }).catch(error => {
+            if(error) throw error;
+        })
+}
+
+export function deleteEmail(emailId){
+    if(typeof emailId !== 'number'){
+        ClientError('400', 'Improper Data Type.')
+    }
+    const init = {method: 'DELETE', headers: {'Content-Type': 'application/json'}}
+    fetch(`${baseUrl}email/delete/${emailId}`, init)
+        .then(response => response.json())
+        .then((returnedResponse) => {
+            if(returnedResponse){
+                alert('Contact Deleted')
+            } else {
+                alert('Error')
+            }
+        }).catch(error => {
+            if(error) throw error;
+        })
+}
+
 export function updateContact(contact){
     const init = {method: 'PUT', headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({

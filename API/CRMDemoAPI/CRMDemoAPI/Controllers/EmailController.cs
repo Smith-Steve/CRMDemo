@@ -129,7 +129,7 @@ namespace CRMDemoAPI.Controllers
             return new JsonResult($"Customer {email.EmailName} in {email.FlightId} updated.");
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public JsonResult DeleteEmail(int id)
         {
             string deleteQuery = @"delete from dbo.Emails where EmailId = @EmailId";

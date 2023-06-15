@@ -56,7 +56,7 @@ class Home extends React.Component {
       //FlightConfiguration has not been configured yet. Therefore this path returns to the home component.
       return <FlightPage activeFlight={this.state.activeFlight} setComponent={this.setComponent}/>
     } else if (path === 'EmailConfiguration'){
-      return <EmailConfiguration activeFlight={this.state.activeFlight}/>
+      return <EmailConfiguration activeFlight={this.state.activeFlight} setActiveEmail={this.setActiveEmail}/>
     }
     return <HomeComponent/>
   }
