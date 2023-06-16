@@ -100,7 +100,7 @@ namespace CRMDemoAPI.Controllers
             return new JsonResult($"Email '{email.EmailName}' added.");
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         public JsonResult PutEmail(Emails email)
         {
             string updateEmailSqlString = @"update dbo.Emails set EmailName = @EmailName, EmailSubjectTitle = @EmailSubjectTitle, EmailBody = @EmailBody, SendOn = @SendOn, EmailNumberInSequence = @EmailNumberInSequence

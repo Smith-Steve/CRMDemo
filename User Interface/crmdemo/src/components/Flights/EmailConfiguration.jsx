@@ -7,23 +7,35 @@ import Email from '../../Library/Email'
 export default class EmailConfiguration extends React.Component {
     constructor(props){
         super(props);
-        this.state = {Component: 'EmailConfiguration', EmailName: '', EmailSubjectTitle: '', EmailBody: '', SendOn: '', EmailNumberInSequence: '', ActiveEmail: window.localStorage.getItem('Active-Email') || null}
+        this.state = {Component: 'EmailConfiguration', EmailName: '', EmailSubjectTitle: '', EmailBody: '', SendOn: '', EmailNumberInSequence: '', ActiveEmail: window.localStorage.getItem('Active-Email') || null, EmailId: null}
     }
 
     componentDidMount() {
-        if (this.props.ActiveEmail != null) this.setForm()
+        if (this.props.activeEmail != null){
+            this.setForm()
+        }
     }
 
+    // setForm = () => {
+    //     this.setState({EmailName: this.props.activeEmail.EmailName, EmailSubjectTitle: this.props.activeEmail.EmailSubjectTitle, EmailBody: this.props.activeEmail.EmailBody, SendOn: this.props.activeEmail.SendOn, EmailNumberInSequence: this.props.activeEmail.EmailNumberInSequence})
+    // }
+
     setForm = () => {
-        const { EmailId, FlightId, EmailName, EmailSubjectTitle, EmailBody, SendOn, SentAt } = this.props.ActiveEmail
+        const {EmailName, EmailSubjectTitle, EmailBody, SendOn, SentAt, EmailNumberInSequence, EmailId} = this.props.activeEmail
         this.setState((prevState) => {
-            return {... prevState, EmailId, FlightId, EmailName, EmailSubjectTitle, EmailBody, SendOn, SentAt}
+            return {... prevState, EmailName, EmailBody, SendOn, SentAt, EmailNumberInSequence, EmailSubjectTitle, EmailId}
         }, this.stateChange)
     }
 
 
     generateEmailObject = () => {
-        const email = JSON.stringify(new Email(this.props.activeFlight.FlightId, this.state.EmailName, this.state.EmailSubjectTitle, this.state.EmailBody, this.state.SendOn, this.state.EmailNumberInSequence))
+        if(this.props.activeEmail != null){
+            let emailUpdate = new Email(this.props.activeFlight.FlightId, this.state.EmailName, this.state.EmailSubjectTitle, this.state.EmailBody, this.state.SendOn, this.state.EmailNumberInSequence)
+            emailUpdate.emailId = this.state.EmailId
+            emailUpdate = JSON.stringify(emailUpdate)
+            return emailUpdate
+        }
+        let email = JSON.stringify(new Email(this.props.activeFlight.FlightId, this.state.EmailName, this.state.EmailSubjectTitle, this.state.EmailBody, this.state.SendOn, this.state.EmailNumberInSequence))
         return email
     }
     //Handle Submit Click
@@ -47,6 +59,8 @@ export default class EmailConfiguration extends React.Component {
 
     handleUpdate = (event) => {
         event.preventDefault()
+        const emailUpdate = this.generateEmailObject()
+        updateEmail(emailUpdate)
         // updateEmail(email)
     }
 
@@ -73,7 +87,7 @@ export default class EmailConfiguration extends React.Component {
                 <div className='row'>
                     <div className='col'>
                         <div className='form-container rounded-corners lg'>
-                            <form onSubmit={this.handleSubmit}>
+                            <form onSubmit={this.props.activeEmail != null ? this.handleUpdate : this.handleSubmit}>
                                 <div className='input-row'>
                                     {
                                         this.props.activeEmail != null ?
@@ -140,7 +154,11 @@ export default class EmailConfiguration extends React.Component {
                                     <input className='rounded-corners' type='number' min="1" max="10" name='EmailNumberInSequence' value={this.state.EmailNumberInSequence} onChange={this.handleChange} required></input>
                                 </div>
                                 <div className='align-right'>
-                                    <button onSubmit={this.handleSubmit}>Enter Email Into Flight</button>
+                                    {
+                                        this.props.activeEmail != null
+                                        ? (<button onSubmit={this.handleUpdate}>Update Customer</button>)
+                                        : (<button onSubmit={this.handleSubmit}>Enter Customer</button>)
+                                    }
                                 </div>
                             </form>
                         </div>

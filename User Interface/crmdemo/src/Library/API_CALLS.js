@@ -132,7 +132,7 @@ export function createEmail(email) {
 export function updateEmail(email){
     const init = {method: 'PUT', headers: {'Content-Type': 'application/json'},
                 body: email}
-    fetch(`${baseUrl}`, init)
+    fetch(`${baseUrl}email/update`, init)
         .then(response => response.json())
         .then((returnedResponse) => {
             if(returnedResponse){
