@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders';
-import { getAllFromFlight, getOneFlight, deleteEmail } from '../../Library/API_CALLS';
+import { getAllFromFlight, deleteEmail } from '../../Library/API_CALLS';
 
 class FlightPage extends React.Component {
     constructor(props){
@@ -16,11 +16,15 @@ class FlightPage extends React.Component {
     getFlightEmails = () => {
         getAllFromFlight(this.props.activeFlight.FlightId)
             .then((this.onGetFlightEmailsSuccess))
-            .catch((error) => console.log('Error message: ', error))
+            .then((this.onGetFlightEmailsError))
     }
 
     onGetFlightEmailsSuccess = (response) => {
         this.setState({emailList: response})
+    }
+
+    onGetFlightEmailsError = (error) => {
+        console.log("Error message: ", error)
     }
 
     removeEmail = (deletedEmail) => {
@@ -96,7 +100,7 @@ class FlightPage extends React.Component {
                         <div className='row'>
                             <div className='col'>
                                 <div className='center'>
-                                    <button className='rounded-corners customer-profile-button'>Edit Flight</button> <button className='rounded-corners customer-profile-button' onClick={this.setComponent}>Add Email</button> <button className='red rounded-corners customer-profile-button'>Delete Email</button>
+                                    <button className='rounded-corners customer-profile-button'>Edit Flight</button> <button className='rounded-corners customer-profile-button' onClick={this.setComponent}>Add Email</button>
                                 </div>
                             </div>
                         </div>

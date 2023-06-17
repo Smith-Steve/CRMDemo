@@ -55,7 +55,7 @@ class CreateContact extends React.Component {
         return(
             <React.Fragment>
             <div>
-                <HeaderComponent component={'Create Contact'}/>
+                <HeaderComponent component={'Contact'}/>
                 <div className="component-body">
                     <div className="row">
                         <div className="col">
