@@ -20,7 +20,10 @@ class FlightPage extends React.Component {
     }
 
     onGetFlightEmailsSuccess = (response) => {
-        this.setState({emailList: response})
+        console.log(response)
+        let finalList = response.sort((a, b) => a.EmailId - b.EmailId)
+        console.log('Final List: ', finalList)
+        this.setState({emailList: finalList})
     }
 
     onGetFlightEmailsError = (error) => {
@@ -79,7 +82,7 @@ class FlightPage extends React.Component {
     }
 
     render(){
-        const emailList = this.state.emailList;
+        const emailList = this.state.emailList.sort((a, b) => b.EmailId - a.EmailId)
         return(
             <div className={this.state.Component}>
                 <HeaderComponent component={this.state.Component}/>

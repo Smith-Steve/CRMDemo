@@ -17,7 +17,7 @@ class Home extends React.Component {
     this.setComponent = this.setComponent.bind(this)
     this.setFlight = this.setFlight.bind(this)
     this.setActiveEmail = this.setActiveEmail.bind(this)
-    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: null, activeFlight: null, activeContact: null, activeEmail: null}
+    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: JSON.parse(localStorage.getItem('Active-Customer')) || null, activeFlight: null, activeContact: null, activeEmail: null}
   }
 
   setActiveCustomer(selectedCustomer){

@@ -49,7 +49,8 @@ namespace CRMDemoAPI.Controllers
         public JsonResult getAllFromFlight(int id)
         {
             string getAllFromFlight = @"Select EmailId, FlightId, EmailName, EmailSubjectTitle, EmailBody, SendOn, CreatedAt, SentAt, EmailNumberInSequence
-                                        from dbo.Emails where FlightId = @FlightId";
+                                        from dbo.Emails where FlightId = @FlightId
+                                        ORDER BY EmailId ASC";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString(dataBaseNameString);
             SqlDataReader getAllFlightReader;

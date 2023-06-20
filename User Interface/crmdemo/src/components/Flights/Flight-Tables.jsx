@@ -18,9 +18,6 @@ function FlightTables({listOfFlights, deleteFlight, setActiveFlight}){
         <div className='row'>
             <div className='col'>
                 <table>
-                    <thead>
-                        <tr>Flight Name</tr>
-                    </thead>
                     <tbody>
                         {flightRow}
                     </tbody>
