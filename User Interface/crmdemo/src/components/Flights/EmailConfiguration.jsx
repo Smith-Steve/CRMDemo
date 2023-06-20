@@ -16,10 +16,6 @@ export default class EmailConfiguration extends React.Component {
         }
     }
 
-    // setForm = () => {
-    //     this.setState({EmailName: this.props.activeEmail.EmailName, EmailSubjectTitle: this.props.activeEmail.EmailSubjectTitle, EmailBody: this.props.activeEmail.EmailBody, SendOn: this.props.activeEmail.SendOn, EmailNumberInSequence: this.props.activeEmail.EmailNumberInSequence})
-    // }
-
     setForm = () => {
         const {EmailName, EmailSubjectTitle, EmailBody, SendOn, SentAt, EmailNumberInSequence, EmailId} = this.props.activeEmail
         this.setState((prevState) => {
@@ -61,7 +57,6 @@ export default class EmailConfiguration extends React.Component {
         event.preventDefault()
         const emailUpdate = this.generateEmailObject()
         updateEmail(emailUpdate)
-        // updateEmail(email)
     }
 
     render(){

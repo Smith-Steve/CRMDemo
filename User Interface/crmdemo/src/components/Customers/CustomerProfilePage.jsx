@@ -6,7 +6,6 @@ export default class CustomerProfilePage extends React.Component {
     constructor(props){
         super(props);
         this.setComponent = this.setComponent.bind(this);
-        this.deleteContact = this.deleteContact.bind(this)
         this.state = { component: 'Customer Profile Page', activeCustomer: this.props.activeCustomer.CustomerName, activeContactList:[] }
     }
 
@@ -24,20 +23,19 @@ export default class CustomerProfilePage extends React.Component {
         this.setState({activeContactList: response})
     }
 
-    getContactListError = (response) => {
-        console.log('Error Message: ', response)
+    getContactListError = (returnedError) => {
+        console.log('Error Message: ', returnedError)
     }
 
-    deleteContact(deletedContact){
-        //function that deletes contact.
-        removeContact(deletedContact.ContactId)
+    deleteContact = (deleteContact) => {
+        removeContact(deleteContact.ContactId);
         this.setState(prevState => {
             const indexOfContact = prevState.activeContactList.findIndex(
-                contact => contact.Email === deletedContact.Email);
-            const newContactList = [...prevState.activeContactList];
-            if(indexOfContact >= 0) newContactList.splice(indexOfContact, 1)
-            return {activeContactList: newContactList}
-        })
+                contact => contact.Email === deleteContact.Email);
+                const newContactList = [...prevState.activeContactList];
+                if(indexOfContact >= 0) newContactList.splite(indexOfContact, 1);
+                return {activeContactList: newContactList}
+        });
     }
 
     editContact = (contact) => {
@@ -46,12 +44,11 @@ export default class CustomerProfilePage extends React.Component {
     }
 
     setComponent(){
-        this.props.setComponent('CreateContact')
+        this.props.setComponent('CreateContacts')
     }
 
     convertDate = (entryDate) => {
-        let originalDate = new Date(entryDate)
-        let returnDate = originalDate.getFullYear()
+        let returnDate = new Date(entryDate).getFullYear()
         return returnDate
     }
 

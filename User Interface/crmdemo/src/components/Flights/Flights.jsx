@@ -18,8 +18,10 @@ export default class Flights extends React.Component {
     }
 
     getFlightDetails = () => {
-        getFlights().then((this.onGetFlightSuccess), 
-            (response) => console.log(response))
+        getFlights()
+            .then((this.onGetFlightSuccess))
+            .then((this.onGetFlightFailure))
+
     }
 
     onGetFlightSuccess = (response) => {

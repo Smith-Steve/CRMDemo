@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderComponent from '../HelperComponents/ComponentHeaders'
-import {getContacts} from '../../Library/API_CALLS'
+import {getCustomers} from '../../Library/API_CALLS'
 
 export default class Customers extends React.Component {
     constructor(props){
@@ -18,11 +18,17 @@ export default class Customers extends React.Component {
     }
 
     getListOfCustomers() {
-        getContacts().then((this.getContactsListSuccess))
+        getCustomers()
+            .then((this.getCustomersListSuccess))
+            .then((this.getContactListError))
     }
 
-    getContactsListSuccess = (returnedCustomerList) => {
+    getCustomersListSuccess = (returnedCustomerList) => {
         this.setState({customerList: returnedCustomerList})
+    }
+
+    getContactListError = (error) => {
+        console.log(error)
     }
 
     setCustomer(customer){

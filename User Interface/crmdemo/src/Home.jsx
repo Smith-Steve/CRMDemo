@@ -17,7 +17,7 @@ class Home extends React.Component {
     this.setComponent = this.setComponent.bind(this)
     this.setFlight = this.setFlight.bind(this)
     this.setActiveEmail = this.setActiveEmail.bind(this)
-    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: JSON.parse(localStorage.getItem('Active-Customer') || null), activeFlight: null, activeContact: null, activeEmail: null}
+    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: null, activeFlight: null, activeContact: null, activeEmail: null}
   }
 
   setActiveCustomer(selectedCustomer){
@@ -44,7 +44,7 @@ class Home extends React.Component {
     const path = this.state.activeComponent;
     if(path === 'CreateContacts')
     {
-      return <CreateCustomer/>
+      return <CreateCustomer activeCustomer={this.state.activeCustomer}/>
     } else if (path === 'Customers') {
       return <Customers setActiveCustomer={this.setActiveCustomer}/>
     } else if (path.substring(0, path.indexOf('/')) === 'Customer') {

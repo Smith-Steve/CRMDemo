@@ -99,7 +99,7 @@ namespace CRMDemoAPI.Controllers
             return new JsonResult($"Customer '{customer.CustomerName}' added.");
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         public JsonResult PutCustomer(Customers customers)
         {
             string updateCustomerSqlString = @"update dbo.Customers
@@ -117,7 +117,7 @@ namespace CRMDemoAPI.Controllers
                 {
                     putCommand.Parameters.AddWithValue("@CustomerId", customers.CustomerId);
                     putCommand.Parameters.AddWithValue("@CustomerName", customers.CustomerName);
-                    putCommand.Parameters.AddWithValue("@CustomerStreet", customers.CustomerStreet1);
+                    putCommand.Parameters.AddWithValue("@CustomerStreet1", customers.CustomerStreet1);
                     putCommand.Parameters.AddWithValue("@CustomerCity", customers.CustomerCity);
                     putCommand.Parameters.AddWithValue("@CustomerState", customers.CustomerState);
                     putCommand.Parameters.AddWithValue("@CustomerVertical", customers.CustomerVertical);
