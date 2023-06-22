@@ -7,8 +7,6 @@ export default class Customers extends React.Component {
         super(props);
         this.state = { component: 'Customers', customerList: [], firstPage: 0, lastPage: 5}
         this.handleClick = this.handleClick.bind(this)
-        this.setCustomer = this.setCustomer.bind(this);
-        this.renderCustomerRow = this.renderCustomerRow.bind(this);
         //There is presently no way to set the state for active customer in this component.
         //This is because the entire customer set of information is not required on this page.
     }
@@ -17,10 +15,10 @@ export default class Customers extends React.Component {
         this.getListOfCustomers();
     }
 
-    getListOfCustomers() {
+    getListOfCustomers = () => {
         getCustomers()
             .then((this.getCustomersListSuccess))
-            .then((this.getContactListError))
+            .catch((this.getContactListError))
     }
 
     getCustomersListSuccess = (returnedCustomerList) => {
@@ -31,12 +29,12 @@ export default class Customers extends React.Component {
         console.log(error)
     }
 
-    setCustomer(customer){
-        this.props.setActiveCustomer(customer.CustomerName)
-        window.localStorage.setItem('Active-Customer', JSON.stringify(customer))
+    setCustomer = (customer) => {
+        console.log('Customer List Component: ', customer)
+        this.props.setActiveCustomer(customer)
     }
 
-    renderCustomerRow(customer){
+    renderCustomerRow = (customer) => {
         let customerCard = customer
         return(
             <div className='Component-Element-Container' onClick={() => this.setCustomer(customerCard)} key={customer.CustomerId}>
@@ -44,8 +42,6 @@ export default class Customers extends React.Component {
                 <p>{customer.CustomerStreet1}</p>
             </div>
         )
-        //treating customer name to replace spaces.
-        //return to work here to continue. Trying to capture selected element so it can be passed into props/state.
     }
 
     handleClick() {

@@ -29,7 +29,7 @@ export default class Flights extends React.Component {
     }
 
     onGetFlightFailure = (response) => {
-        console.log(response)
+        console.log('On Get Flight Failure: ',response)
     }
 
     deleteFlight = (deletedFlightId) =>{
@@ -64,11 +64,10 @@ export default class Flights extends React.Component {
         this.addFlight(this.state.FlightName)
     }
 
-    addFlight = (newFlight, ) => {
+    addFlight = (newFlight) => {
         let lastElementNumber = this.state.listOfFlights.length - 1;
         let lastNumber = this.state.listOfFlights[lastElementNumber].FlightId
         const insertedFlight = {FlightId: lastNumber + 1, FlightName: newFlight}
-        //This is not the appropriate way to be entering this. But since we're just looking to get moving, we'll leave this as is
         this.setState(state => {
             const updateFlightList = [insertedFlight, ...this.state.listOfFlights];
             return {

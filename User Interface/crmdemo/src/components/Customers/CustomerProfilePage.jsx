@@ -5,8 +5,7 @@ import { removeContact, getListOfContacts } from '../../Library/API_CALLS'
 export default class CustomerProfilePage extends React.Component {
     constructor(props){
         super(props);
-        this.setComponent = this.setComponent.bind(this);
-        this.state = { component: 'Customer Profile Page', activeCustomer: this.props.activeCustomer.CustomerName, activeContactList:[] }
+        this.state = { component: 'Customer Profile Page', activeCustomer: this.props.activeCustomer, activeContactList:[] }
     }
 
     componentDidMount(){
@@ -43,8 +42,13 @@ export default class CustomerProfilePage extends React.Component {
         this.setComponent()
     }
 
-    setComponent(){
+    editContactButton = () => {
         this.props.setComponent('CreateContacts')
+    }
+
+    setComponent = () => {
+        this.props.setComponent('CreateContacts')
+        this.props.setActiveCustomer(this.props.activeCustomer)
     }
 
     convertDate = (entryDate) => {
@@ -78,7 +82,7 @@ export default class CustomerProfilePage extends React.Component {
     }
 
     render(){
-        const renderedDate = this.convertDate(this.props.activeCustomer.CustomerJoin)
+        const renderedDate = this.convertDate(this.state.activeCustomer.CustomerJoin)
         const contactList = this.state.activeContactList;
         return(
             <div className={this.state.component}>

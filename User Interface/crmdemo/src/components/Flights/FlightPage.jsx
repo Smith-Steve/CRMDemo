@@ -20,14 +20,12 @@ class FlightPage extends React.Component {
     }
 
     onGetFlightEmailsSuccess = (response) => {
-        console.log(response)
         let finalList = response.sort((a, b) => a.EmailId - b.EmailId)
-        console.log('Final List: ', finalList)
         this.setState({emailList: finalList})
     }
 
     onGetFlightEmailsError = (error) => {
-        console.log("Error message: ", error)
+        console.log("On Get Flight Emails Error: ", error)
     }
 
     removeEmail = (deletedEmail) => {

@@ -13,26 +13,23 @@ import EmailConfiguration from './components/Flights/EmailConfiguration';
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.setActiveCustomer = this.setActiveCustomer.bind(this)
-    this.setComponent = this.setComponent.bind(this)
-    this.setFlight = this.setFlight.bind(this)
-    this.setActiveEmail = this.setActiveEmail.bind(this)
-    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: JSON.parse(localStorage.getItem('Active-Customer')) || null, activeFlight: null, activeContact: null, activeEmail: null}
+    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: null, activeFlight: null, activeContact: null, activeEmail: null}
   }
 
-  setActiveCustomer(selectedCustomer){
-    this.setState({ activeCustomer: selectedCustomer})
+  setActiveCustomer = (selectedCustomer) => {
+    this.setState({activeCustomer: selectedCustomer})
+    console.log('active customer - Home Component: ', selectedCustomer)
   }
 
-  setComponent(component){
+  setComponent = (component) => {
     this.setState({activeComponent: component})
   }
 
-  setFlight(flight){
+  setFlight = (flight) => {
     this.setState({activeFlight: flight})
   }
 
-  setActiveEmail(email){
+  setActiveEmail = (email) => {
     this.setState({activeEmail: email})
   }
 
@@ -48,7 +45,7 @@ class Home extends React.Component {
     } else if (path === 'Customers') {
       return <Customers setActiveCustomer={this.setActiveCustomer}/>
     } else if (path.substring(0, path.indexOf('/')) === 'Customer') {
-      return <CustomerProfilePage setComponent={this.setComponent} activeCustomer={this.state.activeCustomer} setActiveCustomer={this.setActiveCustomer} setActiveContact={this.setActiveContact}/>
+      return <CustomerProfilePage activeCustomer={this.state.activeCustomer} setComponent={this.setComponent} setActiveCustomer={this.setActiveCustomer} setActiveContact={this.setActiveContact}/>
     } else if (path === 'CreateContact'){
       return <CreateContact activeCustomer={this.state.activeCustomer} setComponent={this.setComponent} activeContact={this.state.activeContact}/>
     } else if (path === 'Flights'){
