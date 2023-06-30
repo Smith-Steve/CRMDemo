@@ -82,7 +82,7 @@ export default class CustomerProfilePage extends React.Component {
     }
 
     render(){
-        const renderedDate = this.convertDate(this.state.activeCustomer.CustomerJoin)
+        const renderedDate = this.convertDate(this.props.activeCustomer.CustomerJoin)
         const contactList = this.state.activeContactList;
         return(
             <div className={this.state.component}>

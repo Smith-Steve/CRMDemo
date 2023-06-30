@@ -13,7 +13,7 @@ import EmailConfiguration from './components/Flights/EmailConfiguration';
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: null, activeFlight: null, activeContact: null, activeEmail: null}
+    this.state = { activeComponent: window.location.pathname.replace('/',''), activeCustomer: JSON.parse(localStorage.getItem('Active-Customer')) || null, activeFlight: null, activeContact: null, activeEmail: null}
   }
 
   setActiveCustomer = (selectedCustomer) => {

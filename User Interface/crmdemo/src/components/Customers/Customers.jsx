@@ -31,7 +31,7 @@ export default class Customers extends React.Component {
 
     setCustomer = (customer) => {
         console.log('Customer List Component: ', customer)
-        this.props.setActiveCustomer(customer)
+        window.localStorage.setItem('Active-Customer', JSON.stringify(customer))
     }
 
     renderCustomerRow = (customer) => {
