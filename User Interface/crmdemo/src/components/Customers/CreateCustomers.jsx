@@ -10,7 +10,7 @@ export default class CreateCustomer extends React.Component {
     }
     
     componentDidMount(){
-
+        localStorage.removeItem('Active-Customer')
     }
 
     setForm = () => {
